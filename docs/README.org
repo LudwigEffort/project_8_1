@@ -9,12 +9,6 @@
 :unnumbered: t
 :end:
 + Date: [2023-11-07]
-+ Introduction:
-+ Resources:
-  - Video lessons:
-  - Source code:
-  - Books:
-+ Topics Covered:
 * Project 8.1
 ** UML
 Ecco la projettazione dell'UML...

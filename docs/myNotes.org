@@ -14,4 +14,12 @@
   - Source code:
   - Books:
 + Topics Covered:
+* Ideas
+** Users
+La gestione degli user:
++ creare api a parte
++ gestire gli users tramite controller interno all'API per la gestione del laboratorio
 * TODO Lists
+- [ ] Progettazione App
+- [ ] Creazione UML by db first
+- [ ]
