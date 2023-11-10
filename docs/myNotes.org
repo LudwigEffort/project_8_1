@@ -10,45 +10,46 @@
 + Date: [2023-11-07]
 + Topics Covered:
 * Project 8.1
-** Objective
+** English
+*** Objective
 To develop a Course Management System using C# and .NET that allows users to create, manage and track booking and resources.
 The system must implement CRUD operations, user, authentication and RESTful APIs. The APIs must be consumed by a web interface, that allows user to interact with them.
-** Description
+*** Description
 Create a full application that covers the managements of computer labs inside a company that allows to book both physical resources, such as computer, blackboards, projector and software resource, such as specific applications, remote access to library, etc.
 The student must develop the backend, the front end and some test units covering the backend functionalities.
-** TODO Requirements
-*** TODO User registration and authentication
+*** TODO Requirements
+**** TODO User registration and authentication
  1. [ ] Users should be able to register an account with their email and password.
  2. [ ] Implement user authentication using tokens and persistence.
  3. [ ] Ensure that only authenticated users can access certain functionalities.
  4. [ ] There exists different categories of users that have different access rules(optional).
-*** TODO User Admin
+**** TODO User Admin
  1. [ ] User admin can create, modify, update any user profile (except password).
  2. [ ] User admin can access all users’ information.
  3. [ ] User admin can block or re-enable any user.
  4. [ ] User admin can performs some report on users (such as number of login, time of use, etc.)(optional).
-*** TODO Lab management
+**** TODO Lab management
  1. [ ] Lab Administrator can add new Computer specifying (at least) a name, a description, some technical specification, and the status. Once inserted the date of creation must be stored and a unique id (string of 10 character) must be generated and saved.
  2. [ ] Lab administrator can modify an existing computer but cannot change the unique id and creation date.
  3. [ ] Lab administrator can change the status of each computer resources (state can be available, maintenance, out of order, removed, reserved).
  4. [ ] Lab administrator manage the list of available software and assign them to specific Computer or group of computers(optional).
  5. [ ] Lab administrator manage the list of available resources.
  6. [ ] Lab administrator assign o move a computer to a classroom.
-*** TODO User access
+**** TODO User access
  1. [ ] Once logged, the user can search for a resource and book it if available, if the resource is a computer you can reserve up to 2 slots each day.
  2. [ ] The user can delete a booking.
  3. [ ] The user can signal that they are using the computer.
  4. [ ] The user can receive a Report of their use of resources (optional).
  5. [ ] Each reservation is managed in one-hour time slots, from Monday to Friday, from 9:00 AM to 6:00 PM.
-*** TODO RESTful API
+**** TODO RESTful API
  1. [ ] Implement a RESTful API that exposes endpoints for User management and Lab management (CRUD operations).
  2. [ ] Note that the ai endpoint should be distinguished according to their functionalities and should be implemented as decoupled as possible (optional).
  3. [ ] API should follow RESTful principles, with clear and meaningful URLs.
  4. [ ] Include proper HTTP methods (GET, POST, PUT, DELETE) for each operation.
-*** TODO Persistence
+**** TODO Persistence
  1. [ ] The persistence can be implemented using the preferred mechanism and format.
  2. [ ] The location of data must be independent from specific locations (optional).
-*** TODO User Interface
+**** TODO User Interface
  1. [ ] Create the REST API consumer and a simple web interface for users to interact with the services.
  2. [ ] Feel free to use bootstrap.
  3. [ ] The web interface must require user authentication before showing any other content.
@@ -56,11 +57,11 @@ The student must develop the backend, the front end and some test units covering
  5. [ ] Personalize a bit the web UI to show the role and username/email.
  6. [ ] Perform form validation every time user input is required. Display any validation errors.
  7. [ ] Provide feedback to the user when actions are successful (not necessarily by showing a message) or not (display the errors).
-** Deliverable
+*** Deliverable
 1. A working-class management system.
 2. A brief report of the architecture using UML class diagram.
 3. A presentation including use cases (optional).
-** Grading Criteria
+*** Grading Criteria
 1. Functionality: Completeness and correctness of user registration, authentication, task management, and CRUD operations.
 2. API Design: Proper use of HTTP methods, meaningful URLs, and adherence to RESTful principles.
 3. Data Storage: Effective implementation of data storage.
@@ -69,6 +70,66 @@ The student must develop the backend, the front end and some test units covering
 6. Code Quality: Well-structured, readable, and maintainable code.
 7. Presentation: Ability to explain and present the project.
 8. Test: completeness, correctness of the approach and covering of the test proposed .
+** Italian
+*** Obiettivo
+Sviluppare un Sistema di Gestione Corsi utilizzando C# e .NET che permetta agli utenti di creare, gestire e tracciare prenotazioni e risorse.
+Il sistema deve implementare operazioni CRUD, autenticazione dell'utente e API RESTful. Le API devono essere consumate da un'interfaccia web, che permetta agli utenti di interagire con esse.
+*** Descrizione
+Creare un'applicazione completa che copra la gestione dei laboratori informatici all'interno di un'azienda che permetta di prenotare risorse fisiche, come computer, lavagne, proiettori e risorse software, come applicazioni specifiche, accesso remoto alla biblioteca, ecc.
+Lo studente deve sviluppare il backend, il frontend e alcune unità di test che coprano le funzionalità del backend.
+*** TODO Requisiti
+**** TODO Registrazione e autenticazione utente (Login Web API)
+ 1. [ ] Gli utenti dovrebbero essere in grado di registrare un account con la propria email e password.
+ 2. [ ] Implementare l'autenticazione utente utilizzando token e persistenza.
+ 3. [ ] Assicurarsi che solo gli utenti autenticati possano accedere a determinate funzionalità.
+ 4. [ ] Esistono diverse categorie di utenti che hanno differenti regole di accesso (opzionale).
+**** TODO Amministrazione Utenti (Loging Web API)
+ 1. [ ] L'amministratore degli utenti può creare, modificare, aggiornare qualsiasi profilo utente (eccetto la password).
+ 2. [ ] L'amministratore degli utenti può accedere a tutte le informazioni degli utenti.
+ 3. [ ] L'amministratore degli utenti può bloccare o riabilitare qualsiasi utente.
+ 4. [ ] L'amministratore degli utenti può eseguire alcune segnalazioni sugli utenti (come numero di accessi, tempo di utilizzo, ecc.) (opzionale).
+**** TODO Gestione Laboratorio (Lab mgr Web API)
+ 1. [ ] L'amministratore del laboratorio può aggiungere nuovi computer specificando (almeno) un nome, una descrizione, alcune specifiche tecniche e lo stato. Una volta inserita la data di creazione deve essere memorizzata e deve essere generato e salvato un ID unico (stringa di 10 caratteri).
+ 2. [ ] L'amministratore del laboratorio può modificare un computer esistente ma non può cambiare l'ID unico e la data di creazione.
+ 3. [ ] L'amministratore del laboratorio può cambiare lo stato di ciascuna risorsa del computer (lo stato può essere disponibile, manutenzione, fuori servizio, rimosso, riservato).
+ 4. [ ] L'amministratore del laboratorio gestisce l'elenco dei software disponibili e li assegna a computer specifici o gruppi di computer (opzionale).
+ 5. [ ] L'amministratore del laboratorio gestisce l'elenco delle risorse disponibili.
+ 6. [ ] L'amministratore del laboratorio assegna o sposta un computer in un'aula.
+**** TODO Accesso Utenti (Lab mgr Web API)
+ 1. [ ] Una volta loggato, l'utente può cercare una risorsa e prenotarla se disponibile, se la risorsa è un computer è possibile riservare fino a 2 slot ogni giorno.
+ 2. [ ] L'utente può cancellare una prenotazione.
+ 3. [ ] L'utente può segnalare che sta utilizzando il computer.
+ 4. [ ] L'utente può ricevere un rapporto del proprio utilizzo delle risorse (opzionale).
+ 5. [ ] Ogni prenotazione è gestita in slot di un'ora, da lunedì a venerdì, dalle 9:00 alle 18:00.
+**** TODO API RESTful
+ 1. [ ] Implementare un'API RESTful che espone endpoint per la gestione degli utenti e del laboratorio (operazioni CRUD).
+ 2. [ ] Notare che l'endpoint ai dovrebbe essere distinto in base alle loro funzionalità e dovrebbe essere implementato il più disaccoppiato possibile (opzionale).
+ 3. [ ] L'API dovrebbe seguire i principi RESTful, con URL chiari e significativi.
+ 4. [ ] Includere i metodi HTTP appropriati (GET, POST, PUT, DELETE) per ciascuna operazione.
+**** TODO Persistenza
+ 1. [ ] La persistenza può essere implementata utilizzando il meccanismo e il formato preferiti.
+ 2. [ ] La posizione dei dati deve essere indipendente da posizioni specifiche (opzionale).
+**** TODO Interfaccia Utente
+ 1. [ ] Creare il consumatore dell'API REST e un'interfaccia web semplice per gli utenti per interagire con i servizi.
+ 2. [ ] Sentirsi liberi di usare bootstrap.
+ 3. [ ] L'interfaccia web deve richiedere l'autenticazione dell'utente prima di mostrare qualsiasi altro contenuto.
+ 4. [ ] Una volta che l'utente ha effettuato l'accesso, diversi contenuti devono essere mostrati per corrispondere al ruolo dell'utente (admin o utente semplice) e alle loro capacità.
+ 5. [ ] Personalizzare un po' l'interfaccia utente web per mostrare il ruolo e il nome utente/email.
+ 6. [ ] Eseguire la convalida del modulo ogni volta che è richiesto l'input dell'utente. Visualizzare eventuali errori di convalida.
+ 7. [ ] Fornire un feedback all'utente quando le azioni sono riuscite (non necessariamente mostrando un messaggio) o meno (visualizzare gli errori).
+*** Consegna
+1. Un sistema di gestione delle classi funzionante.
+2. Una breve relazione dell'architettura utilizzando il diagramma delle classi UML.
+3. Una presentazione che include casi d'uso (opzionale).
+*** Criteri di Valutazione
+1. Funzionalità: completezza e correttezza della registrazione degli utenti, autenticazione, gestione delle attività e operazioni CRUD.
+2. Progettazione API: utilizzo corretto dei metodi HTTP, URL significativi e adesione ai principi RESTful.
+3. Archiviazione dei Dati: implementazione efficace dell'archiviazione dei dati.
+4. Interfaccia Utente: usabilità e facilità di utilizzo dell'interfaccia web.
+5. Autenticazione e Autorizzazione: autenticazione degli utenti sicura e controlli di accesso appropriati.
+6. Qualità del Codice: codice ben strutturato, leggibile e manutenibile.
+7. Presentazione: capacità di spiegare e presentare il progetto.
+8. Test: completezza, correttezza dell'approccio e copertura dei test proposti.
 * Idee Struttura App
 ** Summury
 Visto che non voglio impazzire con la gestione dei file, ho deciso di creare un applicazione *db first*, visto che so gestire i database (grazie al background). In questo modo posso concentrarmi sullo sviluppo delle singole API. Sto utilizzando il *repository pattern* per l'accesso ai dati del database, cosi posso decidere di cambiare meccanismo di presistenza dei dati.
@@ -107,15 +168,34 @@ Sto pensando di progettare le web api come singoli microservizi con dei db dedic
 + *Login Web API*: questo microservizio si occupa di registrare e fare il login degli utenti, ci sará un db dedicato e un admin di sistema che si occupa di gestire gli *users client*. Questa API, una volta che l'user client si è autenticato, deve autorizzare le operazioni all'interno del *Lab Web API*.
 + *Lab Web API*: questo microservizio è l'applicazione vera e propria che gestisce un laboratorio d'informatica, essa avrá un db dedicato.
 ** Login Web API
+*** CRUD
++ *USER* deve avere il login e il sign up (POST)
++ Se l'USER ha ruolo di *ADMIN* sblocca tutte le operazioni CRUD sull'user eccetto per la password.
 ** Lab Web API
 * My TODO Lists
 + [-] Progettazione
   - [-] Progettazione App
-  - [ ] Creazione UML by db first
-+ [ ] Requirements
-  - [ ] User registration and authentication
-  - [ ] User Admin
+  - [-] Creazione UML by db first
+  - [ ] Validazioni campi database?
++ [-] Requirements
+  - [-] User registration and authentication
+  - [-] User Admin
   - [ ] Lab management
   - [ ] User access
   - [ ] Persistence
   - [ ] User Interface
+* Come fare?
+** Token Login Web API -> Lab Web API
+*** Local Storage
+Per salvare il token validato dal *Login Web API* possiamo salvarlo nel local storage del
+** Come salvo le info dell'user dal Login al Lab mgr?
+** Gestione time span prenotazioni.
+** Soft delite
+* How to Study
++ Repository pattern
++ Relazioni tra tabelle
++ Dto pattern e AutoMapper
+  + Perché implemento *IMapper* dentro il CategoryController per Category, mentre per Country implemento *IMapper* dentro il *CountryRepository*?
++ Validazioni richieste (~!ModelState.IsValid~)
++ Seed
++ IEnumerable vs ICollection
