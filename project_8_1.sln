@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabWebAPI", "LabWebAPI\LabWebAPI.csproj", "{1BAD6D9D-9E39-4010-AE38-36F7A643A44A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginWebAPI", "LoginWebAPI\LoginWebAPI.csproj", "{0073C8E8-14A1-4432-BFBD-C0DB46B3B0C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BAD6D9D-9E39-4010-AE38-36F7A643A44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAD6D9D-9E39-4010-AE38-36F7A643A44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAD6D9D-9E39-4010-AE38-36F7A643A44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAD6D9D-9E39-4010-AE38-36F7A643A44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0073C8E8-14A1-4432-BFBD-C0DB46B3B0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0073C8E8-14A1-4432-BFBD-C0DB46B3B0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0073C8E8-14A1-4432-BFBD-C0DB46B3B0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0073C8E8-14A1-4432-BFBD-C0DB46B3B0C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

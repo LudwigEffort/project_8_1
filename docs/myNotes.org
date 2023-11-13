@@ -84,9 +84,9 @@ Lo studente deve sviluppare il backend, il frontend e alcune unità di test che 
  3. [ ] Assicurarsi che solo gli utenti autenticati possano accedere a determinate funzionalità.
  4. [ ] Esistono diverse categorie di utenti che hanno differenti regole di accesso (opzionale).
 **** TODO Amministrazione Utenti (Loging Web API)
- 1. [ ] L'amministratore degli utenti può creare, modificare, aggiornare qualsiasi profilo utente (eccetto la password).
- 2. [ ] L'amministratore degli utenti può accedere a tutte le informazioni degli utenti.
- 3. [ ] L'amministratore degli utenti può bloccare o riabilitare qualsiasi utente.
+ 1. [X] L'amministratore degli utenti può creare, modificare, aggiornare qualsiasi profilo utente (eccetto la password).
+ 2. [X] L'amministratore degli utenti può accedere a tutte le informazioni degli utenti.
+ 3. [X] L'amministratore degli utenti può bloccare o riabilitare qualsiasi utente. (con il metodo PUT)
  4. [ ] L'amministratore degli utenti può eseguire alcune segnalazioni sugli utenti (come numero di accessi, tempo di utilizzo, ecc.) (opzionale).
 **** TODO Gestione Laboratorio (Lab mgr Web API)
  1. [ ] L'amministratore del laboratorio può aggiungere nuovi computer specificando (almeno) un nome, una descrizione, alcune specifiche tecniche e lo stato. Una volta inserita la data di creazione deve essere memorizzata e deve essere generato e salvato un ID unico (stringa di 10 caratteri).
@@ -173,17 +173,6 @@ Sto pensando di progettare le web api come singoli microservizi con dei db dedic
 + Se l'USER ha ruolo di *ADMIN* sblocca tutte le operazioni CRUD sull'user eccetto per la password.
 ** Lab Web API
 * My TODO Lists
-+ [-] Progettazione
-  - [-] Progettazione App
-  - [-] Creazione UML by db first
-  - [ ] Validazioni campi database?
-+ [-] Requirements
-  - [-] User registration and authentication
-  - [-] User Admin
-  - [ ] Lab management
-  - [ ] User access
-  - [ ] Persistence
-  - [ ] User Interface
 * Come fare?
 ** Token Login Web API -> Lab Web API
 *** Local Storage
@@ -199,3 +188,4 @@ Per salvare il token validato dal *Login Web API* possiamo salvarlo nel local st
 + Validazioni richieste (~!ModelState.IsValid~)
 + Seed
 + IEnumerable vs ICollection
++ Fluent API
