@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LoginWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("loginApi/client")]
     public class LoginClientService : Controller
     {
         private readonly IUserClientRepository _userClientRepository;
@@ -24,10 +24,10 @@ namespace LoginWebAPI.Controllers
 
         //* POST methods
         //? Sign up
-        [HttpPost]
+        [HttpPost("signUp")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromQuery] UserClientDto createUser)
+        public IActionResult CreateUser([FromBody] UserClientDto createUser)
         {
             if (createUser == null)
             {
@@ -72,31 +72,31 @@ namespace LoginWebAPI.Controllers
         }
 
         //? Login 
-        [HttpPost("login")]
+        [HttpPost("signIn")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult LoginClent([FromQuery] string email, [FromQuery] string passwordWithNuance)
+        public IActionResult LoginClent([FromBody] LoginRequestDto loginRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = _userClientRepository.GetUserByEmail(email);
+            var user = _userClientRepository.GetUserByEmail(loginRequest.Email);
 
             if (user == null || user.IsBanned == true)
             {
                 return Unauthorized("User not found, or is banned");
             }
 
-            var nuance = _authHelper.GenerateNuance(passwordWithNuance.Length);
+            var nuance = _authHelper.GenerateNuance(loginRequest.PasswordWithNuance.Length);
 
-            if (!_authHelper.ValidatePasswordWithNuance(passwordWithNuance, user.Password, nuance))
+            if (!_authHelper.ValidatePasswordWithNuance(loginRequest.PasswordWithNuance, user.Password, nuance))
             {
                 return Unauthorized("Email or password is incorrect.");
             }
 
-            string token = _authHelper.GenerateToken(email);
+            string token = _authHelper.GenerateToken(loginRequest.Email);
 
             return Ok(new { message = "Login successful", Token = token });
         }

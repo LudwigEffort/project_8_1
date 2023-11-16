@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login e Registrazione</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Script -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Personal Script -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <button id="toggleLogin" class="btn btn-primary">Login</button>
+          <button id="toggleSignup" class="btn btn-secondary">Sign Up</button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <div class="row mt-3" id="loginForm" style="display: block">
+        <div class="col">
+          <form id="formLogin">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="loginEmail"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="loginPassword"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Signup Form -->
+      <div class="row mt-3" id="signupForm" style="display: none">
+        <div class="col">
+          <form id="formSignup">
+            <div class="mb-3">
+              <label for="signupEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="signupEmail"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="signupPassword" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="signupPassword"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="signupFirstName" class="form-label">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="signupFirstName"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="signupLastName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="signupLastName"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="signupPhone" class="form-label">Phone</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="signupPhone"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-secondary">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
