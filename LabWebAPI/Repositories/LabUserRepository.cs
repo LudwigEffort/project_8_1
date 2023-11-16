@@ -25,6 +25,11 @@ namespace LabWebAPI.Repositories
             return Save();
         }
 
+        public LabUser GetLabUserByEmail(string email)
+        {
+            return _context.LabUsers.Where(u => u.EmailAddress == email).FirstOrDefault();
+        }
+
         public LabUser GetLabUserById(int id)
         {
             return _context.LabUsers.Where(u => u.Id == id).FirstOrDefault();

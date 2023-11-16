@@ -15,7 +15,7 @@ Quindi avremo due Web API:
 + *Login Web API*, è quell'API che si occupa di gestire i *sign up* e *login* degli utenti, avrá un *admin* che gestisce la lista degli utenti registrati.
 + *Lab Manager Web API*. è l'API che si occupa di gestire il laboratorio, anche qui avremo un admin che gestisce le risorse dell'API.
 Le due API dovranno comunicare tra di loro, il *Login Web API* deve registrare l'user dentro *Lab Manager Web API* se l'user non è gia nel db del laboratorio, il *Login* deve autenticare l'accesso al *Lab* e di conseguenza sbloccare le operazioni degli user loggati.
-Entrambi le *API* sono state pensate come *Model First*, in ottica di integrazione con i database.
+Entrambi le *API* sono state sviluppate con un approccio *Code First*, in ottica di integrazione con i database tramite l'entity framework.
 Qundi per ogni API ho definito i *Model* con le loro relazioni, cosí poi l'*Entity Framework* si occupa di generare il db, con tutte le relazioni tra le tabelle.
 Sto utilizzando il *Repository pattern* per nascondere il codice che si occupa di accedere ai dati del db, in questo modo se in futuro voglio cambiare il meccanismo di persistenza dei dati, per esempio utilizzando un file manager, posso farlo senza troppi problemi.
 ** UML
@@ -61,17 +61,19 @@ Il *client* si identifica con un *token* per sbloccare il controller delle preno
 ** Tasks List
 *** General
 + [-] Progettazione
-  - [-] Progettazione App
-  - [-] Creazione UML by db first
+  - [X] Progettazione App
+  - [-] Creazione UML by Code First
   - [X] Validazioni campi database? -> fatto cone le data anotations
 + [-] Requirements
   - [-] User registration and authentication
   - [-] User Admin
-  - [ ] Lab management
+  - [-] Lab management
   - [ ] User access
-  - [ ] Persistence
+  - [X] Persistence
   - [ ] User Interface (Frontend)
-*** Login
+  - [ ] Tests
+*** DONE Login
+CLOSED: [2023-11-16 Thu 12:08]
 + [X] Creazione Model, DbContext e relazioni
 + [X] Creazione Seed
 + [X] Prima Migration e Seeding
@@ -84,43 +86,58 @@ Il *client* si identifica con un *token* per sbloccare il controller delle preno
   + [X] Client
     - [X] Read
     - [X] Create
-+ [-] Dto & AutoMapper
-+ [-] Controller & HTTP Methods
-  + [-] Admin Controller
++ [X] Dto & AutoMapper
++ [X] Controller & HTTP Methods
+  + [X] Admin Controller
     - [X] GET
     - [X] POST
-    - [-] PUT
+    - [X] PUT
     - [X] DELETE
-  + [-] Client Controller
++ [X] Client Controller
     - [X] POST (Sign up)
-    - [-] POST (Login)
-*** Lab
+    - [X] POST (Login)
+*** DONE Lab
+CLOSED: [2023-11-16 Thu 12:08]
 + [X] Creazione Model, DbContext e relazioni
 + [X] Creazione Seed
 + [X] Prima Migration e Seeding
-+ [ ] Repository Pattern & CRUD
-  - [ ] Read
-  - [ ] Create
-  - [ ] Update
-  - [ ] Delete
-+ [ ] Dto & AutoMapper
-+ [ ] Controller & HTTP Methods
-  - [ ] GET
-  - [ ] POST
-  - [ ] PUT
-  - [ ] DELETE
-**** List of Lab CRUD
++ [X] Repository Pattern & CRUD
+  - [X] Read
+  - [X] Create
+  - [X] Update
+  - [X] Delete
++ [X] Dto & AutoMapper
++ [X] Controller & HTTP Methods
+  - [X] GET
+  - [X] POST
+  - [X] PUT
+  - [X] DELETE
+**** DONE List of Lab CRUD
+CLOSED: [2023-11-16 Thu 12:08]
 + Admin
-  + [ ] Item & Computer
-  + [ ] Lab User
+  + [X] Item (refactor)
+  + [X] Lab User
   + [X] Software
-  + [-] Room
-  + [ ] Reservation (Only Reading)
+  + [X] Room
+  + [X] Reservation (Only Reading)
 + Client
-  + [ ] Item (Only Reading)
-  + [ ] Reservation
+  + [X] Item (Only Reading)
+  + [X] Reservation
+*** TODO To Implement
++ [ ] GET Item by software
++ [ ] GET Item by type
++ [ ] GET Item by room
++ [ ] GET Item by status (available)
++ [ ] Booking by Time Slot
++ [ ] When I booking an item, I Have to change item status. Status come back available when the reservation expires.
++ [ ] Auth by token in Lab Methods
++ [ ] Token expires
++ [ ] Add communication between api
 *** Comunizazione tra API
+Ho inserito nel Login Web API un metodo che mi genera un token, che poi il mio Lab Manager Web API utilizza per autenticare le CRUD del laboratorio.
 *** Autorizzazioni
+L'autorizzazione nel Lab Web API avviene tramite il ~[FromHeader]~ delle richieste, gli passo l'email (con il token per verificare l'autorizzazone), con l'email trovo l'utente nel db e se ha i giusti permessi esegure le operazioni.
 *** Sovrapposizioni Reservations
+Le sovraposizioni le gestisco tramite una query linq, non ho ancora implentato gli slot di tempo.
 *** Frontend
 *** Tests

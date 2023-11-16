@@ -79,7 +79,7 @@ Creare un'applicazione completa che copra la gestione dei laboratori informatici
 Lo studente deve sviluppare il backend, il frontend e alcune unità di test che coprano le funzionalità del backend.
 *** TODO Requisiti
 **** TODO Registrazione e autenticazione utente (Login Web API)
- 1. [ ] Gli utenti dovrebbero essere in grado di registrare un account con la propria email e password.
+ 1. [X] Gli utenti dovrebbero essere in grado di registrare un account con la propria email e password.
  2. [ ] Implementare l'autenticazione utente utilizzando token e persistenza.
  3. [ ] Assicurarsi che solo gli utenti autenticati possano accedere a determinate funzionalità.
  4. [ ] Esistono diverse categorie di utenti che hanno differenti regole di accesso (opzionale).
@@ -102,12 +102,12 @@ Lo studente deve sviluppare il backend, il frontend e alcune unità di test che 
  4. [ ] L'utente può ricevere un rapporto del proprio utilizzo delle risorse (opzionale).
  5. [ ] Ogni prenotazione è gestita in slot di un'ora, da lunedì a venerdì, dalle 9:00 alle 18:00.
 **** TODO API RESTful
- 1. [ ] Implementare un'API RESTful che espone endpoint per la gestione degli utenti e del laboratorio (operazioni CRUD).
- 2. [ ] Notare che l'endpoint ai dovrebbe essere distinto in base alle loro funzionalità e dovrebbe essere implementato il più disaccoppiato possibile (opzionale).
- 3. [ ] L'API dovrebbe seguire i principi RESTful, con URL chiari e significativi.
- 4. [ ] Includere i metodi HTTP appropriati (GET, POST, PUT, DELETE) per ciascuna operazione.
+ 1. [X] Implementare un'API RESTful che espone endpoint per la gestione degli utenti e del laboratorio (operazioni CRUD).
+ 2. [-] Notare che l'endpoint ai dovrebbe essere distinto in base alle loro funzionalità e dovrebbe essere implementato il più disaccoppiato possibile (opzionale).
+ 3. [X] L'API dovrebbe seguire i principi RESTful, con URL chiari e significativi.
+ 4. [X] Includere i metodi HTTP appropriati (GET, POST, PUT, DELETE) per ciascuna operazione.
 **** TODO Persistenza
- 1. [ ] La persistenza può essere implementata utilizzando il meccanismo e il formato preferiti.
+ 1. [X] La persistenza può essere implementata utilizzando il meccanismo e il formato preferiti.
  2. [ ] La posizione dei dati deve essere indipendente da posizioni specifiche (opzionale).
 **** TODO Interfaccia Utente
  1. [ ] Creare il consumatore dell'API REST e un'interfaccia web semplice per gli utenti per interagire con i servizi.
@@ -172,7 +172,6 @@ Sto pensando di progettare le web api come singoli microservizi con dei db dedic
 + *USER* deve avere il login e il sign up (POST)
 + Se l'USER ha ruolo di *ADMIN* sblocca tutte le operazioni CRUD sull'user eccetto per la password.
 ** Lab Web API
-* My TODO Lists
 * Come fare?
 ** Token Login Web API -> Lab Web API
 *** Local Storage
@@ -189,3 +188,4 @@ Per salvare il token validato dal *Login Web API* possiamo salvarlo nel local st
 + Seed
 + IEnumerable vs ICollection
 + Fluent API
++ FromQuery solamente quando dobbiamo passare id nella join table

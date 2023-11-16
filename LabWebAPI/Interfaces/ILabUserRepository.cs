@@ -7,6 +7,7 @@ namespace LabWebAPI.Interfaces
         //* Read Methods
         ICollection<LabUser> GetLabUsers();
         LabUser GetLabUserById(int id);
+        LabUser GetLabUserByEmail(string email);
 
         //* Create Method
         bool CreateLabUser(LabUser labUser);

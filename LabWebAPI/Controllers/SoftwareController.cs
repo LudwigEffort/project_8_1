@@ -67,6 +67,7 @@ namespace LabWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            //? Checks if new software exists by name 
             var software = _softwareRepository.GetSoftwares()
                 .Where(s => s.SoftwareName.Trim().ToUpper() == createSoftware.SoftwareName.TrimEnd().ToUpper())
                 .FirstOrDefault();

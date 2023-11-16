@@ -13,7 +13,7 @@ namespace LabWebAPI.Data
 
         public void SeedDataContext()
         {
-            if (!_dataContext.Computers.Any())
+            if (!_dataContext.Items.Any())
             {
 
                 //? Software
@@ -27,92 +27,89 @@ namespace LabWebAPI.Data
                 var item1 = new Item
                 {
                     ItemName = "Computer 1",
+                    ItemType = "computer",
                     Description = "A powerful computer with Linux",
+                    TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
                     ItemIdentifier = "PC-0000001",
                     Status = "available",
                     CreationDate = DateTime.Now,
-                    Computer = new Computer
+                    ItemSoftwares = new List<ItemSoftware>
                     {
-                        TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
-                        ComputerSoftwares = new List<ComputerSoftware> {
-                            new ComputerSoftware { Software = software1 },
-                            new ComputerSoftware { Software = software4 },
-                            new ComputerSoftware { Software = software5 },
-                        }
+                        new ItemSoftware { Software = software1 },
+                        new ItemSoftware { Software = software4 },
+                        new ItemSoftware { Software = software5 },
                     }
                 };
                 var item2 = new Item
                 {
                     ItemName = "Computer 2",
+                    ItemType = "computer",
                     Description = "A powerful computer with Linux",
+                    TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
                     ItemIdentifier = "PC-0000002",
                     Status = "available",
                     CreationDate = DateTime.Now,
-                    Computer = new Computer
+                    ItemSoftwares = new List<ItemSoftware>
                     {
-                        TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
-                        ComputerSoftwares = new List<ComputerSoftware> {
-                            new ComputerSoftware { Software = software1 },
-                            new ComputerSoftware { Software = software4 },
-                            new ComputerSoftware { Software = software5 },
-                        }
+                        new ItemSoftware { Software = software1 },
+                        new ItemSoftware { Software = software4 },
+                        new ItemSoftware { Software = software5 },
                     }
                 };
                 var item3 = new Item
                 {
                     ItemName = "Computer 3",
+                    ItemType = "computer",
                     Description = "A powerful computer with Linux",
+                    TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
                     ItemIdentifier = "PC-0000003",
                     Status = "available",
                     CreationDate = DateTime.Now,
-                    Computer = new Computer
+                    ItemSoftwares = new List<ItemSoftware>
                     {
-                        TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
-                        ComputerSoftwares = new List<ComputerSoftware> {
-                            new ComputerSoftware { Software = software1 },
-                            new ComputerSoftware { Software = software4 },
-                            new ComputerSoftware { Software = software5 },
-                        }
+                        new ItemSoftware { Software = software1 },
+                        new ItemSoftware { Software = software4 },
+                        new ItemSoftware { Software = software5 },
                     }
                 };
                 var item4 = new Item
                 {
                     ItemName = "Computer 4",
+                    ItemType = "copmputer",
                     Description = "A powerful computer with Linux",
+                    TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
                     ItemIdentifier = "PC-0000004",
                     Status = "available",
                     CreationDate = DateTime.Now,
-                    Computer = new Computer
+                    ItemSoftwares = new List<ItemSoftware>
                     {
-                        TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
-                        ComputerSoftwares = new List<ComputerSoftware> {
-                            new ComputerSoftware { Software = software1 },
-                            new ComputerSoftware { Software = software4 },
-                            new ComputerSoftware { Software = software5 },
-                        }
+                        new ItemSoftware { Software = software1 },
+                        new ItemSoftware { Software = software4 },
+                        new ItemSoftware { Software = software5 },
                     }
                 };
                 var item5 = new Item
                 {
                     ItemName = "Computer 5",
+                    ItemType = "copmputer",
                     Description = "A powerful computer with Linux",
+                    TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
                     ItemIdentifier = "PC-0000005",
                     Status = "available",
                     CreationDate = DateTime.Now,
-                    Computer = new Computer
+                    ItemSoftwares = new List<ItemSoftware>
                     {
-                        TechSpec = "Intel i7, 16GB RAM, 512GB SSD",
-                        ComputerSoftwares = new List<ComputerSoftware> {
-                            new ComputerSoftware { Software = software1 },
-                            new ComputerSoftware { Software = software4 },
-                            new ComputerSoftware { Software = software5 },
-                        }
+                            new ItemSoftware { Software = software1 },
+                            new ItemSoftware { Software = software4 },
+                            new ItemSoftware { Software = software5 },
                     }
                 };
+
                 //? Lim
                 var item6 = new Item
                 {
                     ItemName = "Lim 1",
+                    ItemType = "lim",
                     Description = "Interactive Whiteboard",
                     ItemIdentifier = "LIM-000001",
                     Status = "available",
@@ -121,6 +118,7 @@ namespace LabWebAPI.Data
                 var item7 = new Item
                 {
                     ItemName = "Lim 2",
+                    ItemType = "lim",
                     Description = "Interactive Whiteboard",
                     ItemIdentifier = "LIM-000002",
                     Status = "available",
@@ -129,6 +127,7 @@ namespace LabWebAPI.Data
                 var item8 = new Item
                 {
                     ItemName = "Lim 3",
+                    ItemType = "lim",
                     Description = "Interactive Whiteboard",
                     ItemIdentifier = "LIM-000003",
                     Status = "available",
@@ -188,6 +187,8 @@ namespace LabWebAPI.Data
                     StartTime = DateTime.Now,
                     EndTime = DateTime.Now.AddHours(2),
                     ReservationStatus = "Active",
+                    ItemId = item1.Id,
+                    LabUserId = labUser2.Id,
                     Item = item1,
                     LabUser = labUser2
                 };
@@ -196,8 +197,10 @@ namespace LabWebAPI.Data
                     StartTime = DateTime.Now,
                     EndTime = DateTime.Now.AddHours(2),
                     ReservationStatus = "Active",
-                    Item = item1,
-                    LabUser = labUser2
+                    ItemId = item2.Id,
+                    LabUserId = labUser3.Id,
+                    Item = item2,
+                    LabUser = labUser3
                 };
 
                 //? Rooms
@@ -220,12 +223,11 @@ namespace LabWebAPI.Data
                 };
                 var room3 = new Room
                 {
-                    RoomName = "Room 72",
+                    RoomName = "Room 76",
                     Items = new List<Item> { item8 }
                 };
 
                 //? DataContext
-                // _dataContext.Computers.Add(computer1);
                 _dataContext.Items.AddRange(new[] {
                     item1,
                     item2,

@@ -8,6 +8,9 @@ namespace LabWebAPI.Interfaces
         ICollection<Room> GetRooms();
         Room GetRoomById(int id);
 
+        //TODO: get item by room
+        //ICollection<Item> GetItemsByRoom(int roomId);
+
         //* Create Method
         bool CreateRoom(Room room);
 

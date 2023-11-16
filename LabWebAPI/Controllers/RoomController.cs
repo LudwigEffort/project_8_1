@@ -3,7 +3,6 @@ using LabWebAPI.Dto;
 using LabWebAPI.Interfaces;
 using LabWebAPI.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace LabWebAPI.Controllers
 {
@@ -67,9 +66,16 @@ namespace LabWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var room = _roomRepository.GetRooms()
+            //? Checks if new room exists by name 
+            var rooms = _roomRepository.GetRooms()
                 .Where(r => r.RoomName.Trim().ToUpper() == createRoom.RoomName.TrimEnd().ToUpper())
                 .FirstOrDefault();
+
+            if (rooms != null)
+            {
+                ModelState.AddModelError("", "Room already exists");
+                return StatusCode(422, ModelState);
+            }
 
             if (!ModelState.IsValid)
             {
@@ -77,6 +83,8 @@ namespace LabWebAPI.Controllers
             }
 
             var roomMap = _mapper.Map<Room>(createRoom);
+
+            //TODO: add items and pc?
 
             if (!_roomRepository.CreateRoom(roomMap))
             {
@@ -121,6 +129,7 @@ namespace LabWebAPI.Controllers
             if (!_roomRepository.UpdateRoom(roomFromDb))
             {
                 ModelState.AddModelError("", "Something went wrong while update room data");
+                return StatusCode(500, ModelState);
             }
 
             return NoContent();

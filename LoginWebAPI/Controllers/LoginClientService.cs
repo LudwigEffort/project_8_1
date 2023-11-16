@@ -1,5 +1,6 @@
 using AutoMapper;
 using LoginWebAPI.Dto;
+using LoginWebAPI.Helper;
 using LoginWebAPI.Interfaces;
 using LoginWebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace LoginWebAPI.Controllers
     public class LoginClientService : Controller
     {
         private readonly IUserClientRepository _userClientRepository;
+        private readonly AuthHelper _authHelper;
         private readonly IMapper _mapper;
 
-        public LoginClientService(IUserClientRepository userClientRepository, IMapper mapper)
+        public LoginClientService(IUserClientRepository userClientRepository, AuthHelper authHelper, IMapper mapper)
         {
             _userClientRepository = userClientRepository;
+            _authHelper = authHelper;
             _mapper = mapper;
         }
 
@@ -24,7 +27,7 @@ namespace LoginWebAPI.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromForm] UserClientDto createUser)
+        public IActionResult CreateUser([FromQuery] UserClientDto createUser)
         {
             if (createUser == null)
             {
@@ -46,7 +49,18 @@ namespace LoginWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            var nuanceSignup = _authHelper.GenerateNuance(createUser.Password.Length);
+
+            if (!_authHelper.ValidatePasswordWithNuance(createUser.Password, createUser.Password, nuanceSignup))
+            {
+                return BadRequest("Invalid nuance provided");
+            }
+
             var userMap = _mapper.Map<User>(createUser);
+
+            userMap.Role = "client";
+            userMap.CreationTime = DateTime.Now;
+
 
             if (!_userClientRepository.CreateUser(userMap))
             {
@@ -61,20 +75,30 @@ namespace LoginWebAPI.Controllers
         [HttpPost("login")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult LoginClent(string email, string password)
+        public IActionResult LoginClent([FromQuery] string email, [FromQuery] string passwordWithNuance)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var user = _userClientRepository.GetUserByEmail(email);
 
-            if (user == null || user.Password != password)
+            if (user == null || user.IsBanned == true)
+            {
+                return Unauthorized("User not found, or is banned");
+            }
+
+            var nuance = _authHelper.GenerateNuance(passwordWithNuance.Length);
+
+            if (!_authHelper.ValidatePasswordWithNuance(passwordWithNuance, user.Password, nuance))
             {
                 return Unauthorized("Email or password is incorrect.");
             }
 
-            //TODO: add token for lab manager API
-            //TODO: insert ModelState.IsValid?
+            string token = _authHelper.GenerateToken(email);
 
-            return Ok("Login successful");
+            return Ok(new { message = "Login successful", Token = token });
         }
 
     }

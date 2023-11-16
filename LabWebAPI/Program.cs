@@ -1,5 +1,6 @@
 using LabWebAPI.Data;
 using LabWebAPI.Interfaces;
+using LabWebAPI.Middlewares;
 using LabWebAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,9 @@ builder.Services.AddTransient<Seed>(); //? inject seed service
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //? inject automapper service
 builder.Services.AddScoped<ISoftwareRepository, SoftwareRepository>(); //? inject software repository
 builder.Services.AddScoped<IRoomRepository, RoomRepository>(); //? inject room repository
+builder.Services.AddScoped<ILabUserRepository, LabUserRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,26 +32,18 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 var app = builder.Build();
 
-// Use seed services
+//? Use seed services
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
     SeedData(app);
 
 void SeedData(IHost app)
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
-        try
-        {
-            var seed = services.GetRequiredService<Seed>();
-            seed.SeedDataContext();
-        }
-        catch (Exception ex)
-        {
-            var logger = services.GetRequiredService<ILogger<Program>>();
-            logger.LogError(ex, "An error occurred while seeding the database.");
-        }
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<Seed>();
+        service.SeedDataContext();
     }
 }
 
@@ -58,7 +54,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+
+app.UseMiddleware<AuthValidationMiddleware>(); //? inject my middleware
 
 app.UseAuthorization();
 
