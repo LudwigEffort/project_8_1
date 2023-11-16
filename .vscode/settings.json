@@ -4,16 +4,16 @@
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "database": "${workspaceFolder:project_8_1}/LoginWebAPI/db/LoginDatabase.db",
-      "name": "LoginDb",
-      "group": "Project8.1"
+      "name": "LabManagerDb",
+      "group": "Project8.1",
+      "database": "${workspaceFolder:project_8_1}/LabWebAPI/db/LabManagerDatabase.db"
     },
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "name": "LabManagerDb",
-      "group": "Project8.1",
-      "database": "${workspaceFolder:project_8_1}/LabWebAPI/db/LabManagerDatabase.db"
+      "database": "${workspaceFolder:project_8_1}/LoginWebAPI/db/LoginDatabase.db",
+      "name": "LoginDb",
+      "group": "Project8.1"
     }
   ]
 }

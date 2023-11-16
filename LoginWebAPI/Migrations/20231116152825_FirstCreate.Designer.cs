@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoginWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231112123139_FirstCreate")]
+    [Migration("20231116152825_FirstCreate")]
     partial class FirstCreate
     {
         /// <inheritdoc />

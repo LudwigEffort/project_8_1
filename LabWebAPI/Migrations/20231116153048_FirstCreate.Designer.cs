@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231115172632_FirstCreate")]
+    [Migration("20231116153048_FirstCreate")]
     partial class FirstCreate
     {
         /// <inheritdoc />
