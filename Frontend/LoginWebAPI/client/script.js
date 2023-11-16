@@ -1,42 +1,3 @@
-class RestAPI {
-  baserURL;
-  constructor(baserURL) {
-    this.baserURL = baserURL;
-  }
-  async login(postJson) {
-    try {
-      const response = await fetch(`${this.baserURL}`, {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(postJson),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        if (data.token) {
-          localStorage.setItem("authToken", data.token);
-        }
-        return data;
-      } else {
-        throw new Error("HTTP error, state: " + response.status);
-      }
-    } catch (error) {
-      console.error("Failed to login:", error);
-    }
-  }
-}
-
-const restAPI = new RestAPI(
-  "http://localhost:5224/api/LoginClientService/login"
-);
-
-let user = { email: "client1@example.com", passwordWithNuance: "client123" };
-
-//let test = restAPI.login(user);
-
-//console.log(test);
-
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.getElementById("toggleLogin");
   const signupButton = document.getElementById("toggleSignup");
@@ -64,4 +25,54 @@ document.addEventListener("DOMContentLoaded", () => {
     loginButton.classList.add("btn-secondary");
     loginButton.classList.remove("btn-primary");
   });
+});
+
+class RestAPI {
+  baserURL;
+  constructor(baserURL) {
+    this.baserURL = baserURL;
+  }
+  async signIn(postJson) {
+    try {
+      const response = await fetch(`${this.baserURL}`, {
+        method: "POST",
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(postJson),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.token) {
+          localStorage.setItem("authToken", data.token);
+        }
+        return data;
+      } else {
+        throw new Error("HTTP error, state: " + response.status);
+      }
+    } catch (error) {
+      console.error("Failed to login:", error);
+    }
+  }
+}
+
+const apiSignIn = new RestAPI("http://localhost:5224/loginApi/client/signIn");
+
+const loginForm = document.getElementById("formLogin");
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const loginRequest = {
+    email: email,
+    passwordWithNuance: password,
+  };
+  try {
+    const result = await apiSignIn.signIn(loginRequest);
+    console.log("Login successful:", result);
+    // Gestire il successo del login qui
+  } catch (error) {
+    console.error("Login failed:", error);
+    // Gestire l'errore di login qui
+  }
 });
