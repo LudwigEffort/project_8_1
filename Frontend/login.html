@@ -22,104 +22,51 @@
     <!-- Personal Script -->
     <script src="js/login.js" defer></script>
   </head>
-  <!-- Nav bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Login Manager</a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <button id="toggleLogin" class="btn btn-primary">Login</button>
-          </li>
-          <li class="nav-item">
-            <button id="toggleSignup" class="btn btn-secondary">Sign Up</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
   <body>
-    <div class="container mt-5">
-      <!-- Login Form -->
-      <div class="row mt-3" id="loginForm" style="display: block">
-        <div class="col">
-          <form id="formLogin">
-            <div class="mb-3">
-              <label for="loginEmail" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="loginEmail"
-                required
-              />
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">Laboratory Manager</a>
+          <div class="navbar-nav ms-auto">
+            <a class="btn btn-primary me-2" id="loginBtn" href="login.html"
+              >Login</a
+            >
+            <a class="btn btn-primary me-2" id="signupBtn" href="">SignUp</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <div class="card-header">Login</div>
+              <div class="card-body">
+                <form id="loginForm">
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" />
+                  </div>
+                  <button id="loginBtn" type="submit" class="btn btn-primary">
+                    Login
+                  </button>
+                </form>
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="loginPassword" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="loginPassword"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-          </form>
+          </div>
         </div>
       </div>
-
-      <!-- Signup Form -->
-      <div class="row mt-3" id="signupForm" style="display: none">
-        <div class="col">
-          <form id="formSignup">
-            <div class="mb-3">
-              <label for="signupEmail" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="signupEmail"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="signupPassword" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="signupPassword"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="signupFirstName" class="form-label">First Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="signupFirstName"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="signupLastName" class="form-label">Last Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="signupLastName"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="signupPhone" class="form-label">Phone</label>
-              <input
-                type="tel"
-                class="form-control"
-                id="signupPhone"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-secondary">Sign Up</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    </main>
   </body>
 </html>

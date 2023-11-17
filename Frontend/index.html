@@ -22,57 +22,34 @@
     <!-- Personal Script -->
     <script src="js/index.js" defer></script>
   </head>
+
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <!-- Logo and Links to the left -->
-        <a class="navbar-brand" href="#">Laboratory Manager</a>
-        <div class="navbar-nav me-auto">
-          <a class="nav-link" href="#">Item</a>
-          <a class="nav-link" href="#">LabUser</a>
-          <a class="nav-link" href="#">Reservation</a>
-          <a class="nav-link" href="#">Room</a>
-          <a class="nav-link" href="#">Software</a>
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">Laboratory Manager</a>
+          <div class="navbar-nav me-auto">
+            <a class="nav-link" href="#">Item</a>
+            <a class="nav-link" href="#">LabUser</a>
+            <a class="nav-link" href="#">Reservation</a>
+            <a class="nav-link" href="#">Room</a>
+            <a class="nav-link" href="#">Software</a>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <a class="btn btn-primary me-2" id="loginBtn" href="login.html"
+              >Login</a
+            >
+            <a class="btn btn-primary me-2" id="signupBtn" href="">SignUp</a>
+          </div>
         </div>
-
-        <!-- Select for HTTP Methods with Label to the right -->
-        <div class="d-flex">
-          <!-- Label for Select -->
-          <label for="httpMethodSelect" class="me-2">Admin</label>
-          <select id="httpMethodSelect" class="form-select">
-            <option value="get">GET</option>
-            <option value="post">POST</option>
-            <option value="put">PUT</option>
-            <option value="delete">DELETE</option>
-          </select>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container mt-5">
-      <!-- Content -->
-      <div id="content">
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <div class="row"></div>
         <h1>Items</h1>
-        <div id="get" class="method-content">
-          <h2>GET</h2>
-          <!-- GET container -->
-          <button id="printGET" class="btn btn-primary">Print</button>
-          <div id="tableContainer"></div>
-        </div>
-        <div id="post" class="method-content" style="display: none">
-          <h2>POST</h2>
-          <!-- POST container -->
-        </div>
-        <div id="put" class="method-content" style="display: none">
-          <h2>PUT</h2>
-          <!-- PUT container -->
-        </div>
-        <div id="delete" class="method-content" style="display: none">
-          <h2>DELETE</h2>
-          <!-- DELETE container -->
-        </div>
       </div>
-    </div>
+    </main>
   </body>
 </html>

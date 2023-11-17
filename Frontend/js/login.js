@@ -1,32 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const loginButton = document.getElementById("toggleLogin");
-  const signupButton = document.getElementById("toggleSignup");
-  const loginForm = document.getElementById("loginForm");
-  const signupForm = document.getElementById("signupForm");
+//* DOM Scripts
+const loginForm = document.getElementById("loginForm");
 
-  loginButton.addEventListener("click", () => {
-    loginForm.style.display = "block";
-    signupForm.style.display = "none";
-
-    loginButton.classList.add("btn-primary");
-    loginButton.classList.remove("btn-secondary");
-
-    signupButton.classList.add("btn-secondary");
-    signupButton.classList.remove("btn-primary");
-  });
-
-  signupButton.addEventListener("click", () => {
-    signupForm.style.display = "block";
-    loginForm.style.display = "none";
-
-    signupButton.classList.add("btn-primary");
-    signupButton.classList.remove("btn-secondary");
-
-    loginButton.classList.add("btn-secondary");
-    loginButton.classList.remove("btn-primary");
-  });
-});
-
+//* Backend Scripts
 class RestAPI {
   baserURL;
   constructor(baserURL) {
@@ -64,44 +39,14 @@ class RestAPI {
       console.error("Failed to login:", error);
     }
   }
-  async signUp(postJson) {
-    try {
-      const response = await fetch(`${this.baserURL}`, {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(postJson),
-      });
-
-      if (!response.ok) {
-        throw new Error("HTTP error, state: " + response.status);
-      }
-
-      const contentType = response.headers.get("content-type");
-
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new TypeError("Received non-JSON response from server");
-      }
-
-      const data = await response.json();
-
-      if (response.ok) {
-        return data;
-      } else {
-        throw new Error("HTTP error, state: " + response.status);
-      }
-    } catch (error) {
-      console.error("Failed to sign up:", error);
-    }
-  }
 }
 
 const apiSignIn = new RestAPI("http://localhost:5224/auth/client/signIn");
-const loginForm = document.getElementById("formLogin");
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
   const loginRequest = {
     email: email,
     passwordWithNuance: password,
@@ -110,36 +55,9 @@ loginForm.addEventListener("submit", async (event) => {
     const result = await apiSignIn.signIn(loginRequest);
     console.log("Login successful:", result);
     //TODO: add redirect to lab manager
-    //window.location.href = "http://127.0.0.1:8080";
+    window.location.href = "index.html";
   } catch (error) {
     console.error("Login failed:", error);
     //TODO: redirect to login
-  }
-});
-
-const apiSignUp = new RestAPI("http://localhost:5224/auth/client/signUp");
-const signUpForm = document.getElementById("formSignup");
-
-signUpForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const email = document.getElementById("signupEmail").value;
-  const password = document.getElementById("signupPassword").value;
-  const firstName = document.getElementById("signupFirstName").value;
-  const lastName = document.getElementById("signupLastName").value;
-  const phone = document.getElementById("signupPhone").value;
-  const signUpRequest = {
-    emailAddress: email,
-    password: password,
-    firstName: firstName,
-    lastName: lastName,
-    phoneNumber: phone,
-  };
-  try {
-    const result = await apiSignUp.signUp(signUpRequest);
-    console.log("Login successful: ", result);
-    //TODO: redirect to login
-  } catch (error) {
-    console.error("Sign up failed: ", error);
-    //TODO: redirect to signup
   }
 });
