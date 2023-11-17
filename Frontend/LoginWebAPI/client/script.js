@@ -40,6 +40,16 @@ class RestAPI {
         body: JSON.stringify(postJson),
       });
 
+      if (!response.ok) {
+        throw new Error("HTTP error, state: " + response.status);
+      }
+
+      const contentType = response.headers.get("content-type");
+
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new TypeError("Received non-JSON response from server");
+      }
+
       const data = await response.json();
 
       if (response.ok) {
@@ -61,6 +71,16 @@ class RestAPI {
         headers: { "Content-type": "application/json; charset=UTF-8" },
         body: JSON.stringify(postJson),
       });
+
+      if (!response.ok) {
+        throw new Error("HTTP error, state: " + response.status);
+      }
+
+      const contentType = response.headers.get("content-type");
+
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new TypeError("Received non-JSON response from server");
+      }
 
       const data = await response.json();
 
