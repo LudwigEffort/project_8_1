@@ -20,15 +20,24 @@
     <!-- Personal Script -->
     <script src="script.js" defer></script>
   </head>
+  <!-- Nav bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Login Manager</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button id="toggleLogin" class="btn btn-primary">Login</button>
+          </li>
+          <li class="nav-item">
+            <button id="toggleSignup" class="btn btn-secondary">Sign Up</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <body>
     <div class="container mt-5">
-      <div class="row">
-        <div class="col">
-          <button id="toggleLogin" class="btn btn-primary">Login</button>
-          <button id="toggleSignup" class="btn btn-secondary">Sign Up</button>
-        </div>
-      </div>
-
       <!-- Login Form -->
       <div class="row mt-3" id="loginForm" style="display: block">
         <div class="col">

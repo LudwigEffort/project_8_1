@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LoginWebAPI.Controllers
 {
     [ApiController]
-    [Route("loginApi/client")]
+    [Route("auth/client")]
     public class LoginClientService : Controller
     {
         private readonly IUserClientRepository _userClientRepository;
