@@ -69,7 +69,7 @@ class RestLabApi {
 //? Script for auth...
 const api = new RestLabApi("http://localhost:5005/api/item");
 
-document.getElementById("printGet").addEventListener("click", function () {
+document.getElementById("printGET").addEventListener("click", function () {
   api.getItems().then((data) => {
     if (data) {
       createTableFromJson(JSON.stringify(data));
