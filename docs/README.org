@@ -136,8 +136,7 @@ CLOSED: [2023-11-16 Thu 12:08]
 *** Comunizazione tra API
 Ho inserito nel Login Web API un metodo che mi genera un token, che poi il mio Lab Manager Web API utilizza per autenticare le CRUD del laboratorio.
 *** Autorizzazioni
-L'autorizzazione nel Lab Web API avviene tramite il ~[FromHeader]~ delle richieste, gli passo l'email (con il token per verificare l'autorizzazone), con l'email trovo l'utente nel db e se ha i giusti permessi esegure le operazioni.
 *** Sovrapposizioni Reservations
 Le sovraposizioni le gestisco tramite una query linq, non ho ancora implentato gli slot di tempo.
-*** Frontend
+*** TODO Frontend
 *** Tests

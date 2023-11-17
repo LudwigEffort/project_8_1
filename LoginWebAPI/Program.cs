@@ -21,6 +21,7 @@ builder.Services.AddScoped<AuthHelper>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS Service
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
