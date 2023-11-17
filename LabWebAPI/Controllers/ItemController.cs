@@ -32,7 +32,7 @@ namespace LabWebAPI.Controllers
         {
             var user = HttpContext.Items["User"] as LabUser;
 
-            if (user == null) //|| user.Role != "admin"
+            if (user == null || user.Role != "admin")
             {
                 return Unauthorized("Not authorized!");
             }
