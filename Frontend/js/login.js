@@ -110,7 +110,7 @@ loginForm.addEventListener("submit", async (event) => {
     const result = await apiSignIn.signIn(loginRequest);
     console.log("Login successful:", result);
     //TODO: add redirect to lab manager
-    window.location.href = "../../LabManagerWebAPI/admin/index.html";
+    //window.location.href = "http://127.0.0.1:8080";
   } catch (error) {
     console.error("Login failed:", error);
     //TODO: redirect to login
