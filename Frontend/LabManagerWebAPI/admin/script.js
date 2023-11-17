@@ -67,7 +67,7 @@ class RestLabApi {
 }
 
 //? Script for auth...
-const api = new RestLabApi("http://localhost:5005/api/item");
+const api = new RestLabApi("http://localhost:5005/api/Item");
 
 document.getElementById("printGET").addEventListener("click", function () {
   api.getItems().then((data) => {
