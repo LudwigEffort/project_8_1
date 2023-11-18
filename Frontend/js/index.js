@@ -38,9 +38,20 @@ class RestAPI {
   }
   //? POST
   //? PUT
-  async update(id, putJson, token) {
+  async update(id, queryId, putJson, token) {
     try {
-      const response = await fetch(`${this.baseURL}/edit/${id}`, {
+      let url = new URL(`${this.baseURL}/edit/${id}`);
+
+      if (queryId) {
+        let params = new URLSearchParams();
+        params.append("softwareId", queryId);
+        url.search = params;
+      }
+
+      console.log("URL:", url.toString());
+      console.log("Software ID:", softwareId);
+
+      const response = await fetch(url, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,10 +149,11 @@ updateForm.addEventListener("submit", async (event) => {
     status: document.getElementById("editStatus").value,
     roomId: document.getElementById("editRoomId").value,
   };
+  let softwareId = document.getElementById("editSoftwareId").value;
 
   try {
-    const restAPI = new RestAPI("http://localhost:5005/LabManager/item/");
-    const response = await restAPI.update(itemId, itemData, token);
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/item");
+    const response = await restAPI.update(itemId, itemData, softwareId, token);
     if (response) {
       alert("Item updated successfully!");
     } else {

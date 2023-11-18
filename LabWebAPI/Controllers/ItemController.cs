@@ -31,17 +31,17 @@ namespace LabWebAPI.Controllers
         public IActionResult GetItems()
         {
             //? Auth
-            if (!HttpContext.Items.ContainsKey("User"))
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (!HttpContext.Items.ContainsKey("User"))
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
-            var user = HttpContext.Items["User"] as LabUser;
+            // var user = HttpContext.Items["User"] as LabUser;
 
-            if (user == null || user.Role != "admin")
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (user == null || user.Role != "admin")
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
             //? Item
             var items = _mapper.Map<List<ItemDto>>(_itemRepository.GetItems());
@@ -131,17 +131,17 @@ namespace LabWebAPI.Controllers
         public IActionResult UpdateItem(int itemId, [FromQuery] int softwareId, [FromBody] ItemDto itemUpdate)
         {
             //? Auth
-            if (!HttpContext.Items.ContainsKey("User"))
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (!HttpContext.Items.ContainsKey("User"))
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
-            var user = HttpContext.Items["User"] as LabUser;
+            // var user = HttpContext.Items["User"] as LabUser;
 
-            if (user == null || user.Role != "admin")
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (user == null || user.Role != "admin")
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
             //? Item
             if (itemUpdate == null)
