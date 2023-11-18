@@ -46,13 +46,13 @@ signUpForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const fistName = document.getElementById("firstName").value;
+  const firstName = document.getElementById("firstName").value;
   const lastName = document.getElementById("lastName").value;
   const phone = document.getElementById("phone").value;
   const signUpRequest = {
     emailAddress: email,
     password: password,
-    fistName: fistName,
+    firstName: firstName,
     lastName: lastName,
     phoneNumber: phone,
   };
