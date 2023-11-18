@@ -1,15 +1,12 @@
-//* DOM Scripts
-const loginForm = document.getElementById("loginForm");
-
 //* Backend Scripts
 class RestAPI {
-  baserURL;
-  constructor(baserURL) {
-    this.baserURL = baserURL;
+  baseURL;
+  constructor(baseURL) {
+    this.baseURL = baseURL;
   }
-  async signIn(postJson) {
+  async signUp(postJson) {
     try {
-      const response = await fetch(`${this.baserURL}`, {
+      const response = await fetch(`${this.baseURL}`, {
         method: "POST",
         headers: { "Content-type": "application/json; charset=UTF-8" },
         body: JSON.stringify(postJson),
@@ -29,36 +26,41 @@ class RestAPI {
       const data = await response.json();
 
       if (response.ok) {
-        if (data.token) {
-          localStorage.setItem("authToken", data.token);
-        }
         return data;
       } else {
         throw new Error("HTTP error, state: " + response.status);
       }
     } catch (error) {
-      console.error("Failed to SignIn:" + error);
+      console.error("Failed to SignUp: " + error);
     }
   }
 }
 
-const apiSignIn = new RestAPI("http://localhost:5224/auth/client/signIn");
+//* DOM Scripts
+const signUpForm = document.getElementById("signUpForm");
 
-loginForm.addEventListener("submit", async (event) => {
+//? SignUp Form
+const loginAPI = new RestAPI("http://localhost:5224/auth/client/signUp");
+
+signUpForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const loginRequest = {
-    email: email,
-    passwordWithNuance: password,
+  const fistName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const phone = document.getElementById("phone").value;
+  const signUpRequest = {
+    emailAddress: email,
+    password: password,
+    fistName: fistName,
+    lastName: lastName,
+    phoneNumber: phone,
   };
   try {
-    const result = await apiSignIn.signIn(loginRequest);
-    console.log("Login successful:" + result);
-    //TODO: add redirect to lab manager
-    window.location.href = "../index.html";
+    const result = await loginAPI.signUp(signUpRequest);
+    console.log("SignUp successful: " + result);
+    window.location.href = "login.html";
   } catch (error) {
-    console.error("Login failed:" + error);
-    //TODO: redirect to login
+    console.error("SignUp failed: " + error);
   }
 });

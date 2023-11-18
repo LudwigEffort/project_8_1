@@ -132,11 +132,17 @@ CLOSED: [2023-11-16 Thu 12:08]
 + [ ] When I booking an item, I Have to change item status. Status come back available when the reservation expires.
 + [ ] Auth by token in Lab Methods
 + [ ] Token expires
-+ [ ] Add communication between api
++ [-] Add communication between api
 *** Comunizazione tra API
 Ho inserito nel Login Web API un metodo che mi genera un token, che poi il mio Lab Manager Web API utilizza per autenticare le CRUD del laboratorio.
 *** Autorizzazioni
 *** Sovrapposizioni Reservations
 Le sovraposizioni le gestisco tramite una query linq, non ho ancora implentato gli slot di tempo.
 *** TODO Frontend
++ [-] Login page
+  + [-] Login form
+  + [ ] Log out (clear local storage)
++ [ ] SignUp page
++ [ ] Lab page
+  + [ ]
 *** Tests
