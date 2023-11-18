@@ -17,10 +17,10 @@ namespace LabWebAPI.Middlewares
             try
             {
                 //? token: ludwig@gmail.com-PJTDO5QE5O
-                var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split("").Last();
+                var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ').Last();
                 Console.WriteLine($"Header of Authorization: {token}");
 
-                if (token != null)
+                if (!string.IsNullOrEmpty(token))
                 {
                     AttachUserToContext(context, labUserRepository, token);
                 }
