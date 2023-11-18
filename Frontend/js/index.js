@@ -21,7 +21,7 @@ class RestAPI {
     }
   }
   //? Get by Id
-  async getById(token, id) {
+  async getById(id, token) {
     try {
       const response = await fetch(`${this.baseURL}/${id}`, {
         method: "GET",
@@ -38,7 +38,7 @@ class RestAPI {
   }
   //? POST
   //? PUT
-  async update(token, id, putJson) {
+  async update(id, putJson, token) {
     try {
       const response = await fetch(`${this.baseURL}/edit/${id}`, {
         method: "PUT",
@@ -70,7 +70,6 @@ getBtn.addEventListener("click", async () => {
   try {
     const result = await labAPI.get(token);
     console.log(token);
-    console.log(result);
     generateTable(result);
   } catch (error) {
     console.error("Failed to GET request: " + error);
@@ -109,10 +108,10 @@ function generateTable(data) {
 }
 
 //?? PUT
-async function loadItemById(token, id) {
+async function loadItemById(id, token) {
   try {
     const restAPI = new RestAPI("http://localhost:5005/LabManager/item");
-    const data = await restAPI.getById(token, id);
+    const data = await restAPI.getById(id, token);
     document.getElementById("editId").value = data.id;
     document.getElementById("editName").value = data.itemName;
     document.getElementById("editType").value = data.itemType;
@@ -142,7 +141,12 @@ updateForm.addEventListener("submit", async (event) => {
 
   try {
     const restAPI = new RestAPI("http://localhost:5005/LabManager/item/");
-    const response = await restAPI.update(token, itemId, itemData);
+    const response = await restAPI.update(itemId, itemData, token);
+    if (response) {
+      alert("Item updated successfully!");
+    } else {
+      alert("Error updating item");
+    }
   } catch (error) {
     console.error("Failed to update data: " + error);
   }
