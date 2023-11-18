@@ -2,6 +2,7 @@ using LabWebAPI.Data;
 using LabWebAPI.Dto;
 using LabWebAPI.Interfaces;
 using LabWebAPI.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabWebAPI.Repositories
 {
@@ -52,7 +53,10 @@ namespace LabWebAPI.Repositories
 
         public ICollection<Item> GetItems()
         {
-            return _context.Items.ToList();
+            return _context.Items
+                .Include(i => i.ItemSoftwares)
+                .ThenInclude(isr => isr.Software)
+                .ToList();
         }
 
         public bool ItemExists(int itemId)

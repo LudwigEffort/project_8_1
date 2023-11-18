@@ -14,7 +14,8 @@ namespace LabWebAPI.Helper
             CreateMap<RoomDto, Room>();
             CreateMap<LabUser, LabUserDto>();
             CreateMap<LabUserDto, LabUser>();
-            CreateMap<Item, ItemDto>();
+            CreateMap<Item, ItemDto>()
+                .ForMember(dest => dest.Softwares, opt => opt.MapFrom(src => src.ItemSoftwares.Select(isr => isr.Software)));
             CreateMap<ItemDto, Item>();
             CreateMap<Reservation, ReservationDto>();
             CreateMap<ReservationDto, Reservation>();

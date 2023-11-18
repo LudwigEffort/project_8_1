@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.SignalR;
+
 namespace LabWebAPI.Dto
 {
     public class ItemDto
@@ -11,5 +13,6 @@ namespace LabWebAPI.Dto
         public string Status { get; set; } = "available";
         public DateTime CreationDate { get; set; }
         public int RoomId { get; set; }
+        public List<SoftwareDto> Softwares { get; set; }
     }
 }

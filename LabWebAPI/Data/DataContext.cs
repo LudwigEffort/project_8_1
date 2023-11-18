@@ -1,5 +1,4 @@
 using LabWebAPI.Model;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabWebAPI.Data

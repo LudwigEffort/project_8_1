@@ -30,17 +30,17 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(Item))]
         public IActionResult GetItems()
         {
-            if (!HttpContext.Items.ContainsKey("User"))
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (!HttpContext.Items.ContainsKey("User"))
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
-            var user = HttpContext.Items["User"] as LabUser;
+            // var user = HttpContext.Items["User"] as LabUser;
 
-            if (user == null || user.Role != "admin")
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (user == null || user.Role != "admin")
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
             var items = _mapper.Map<List<ItemDto>>(_itemRepository.GetItems());
 
