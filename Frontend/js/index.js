@@ -4,6 +4,7 @@ class RestAPI {
   constructor(baseURL) {
     this.baseURL = baseURL;
   }
+  //? GET all
   async get(token) {
     try {
       const response = await fetch(`${this.baseURL}`, {
@@ -14,15 +15,46 @@ class RestAPI {
       if (!response.ok) {
         throw new Error("HTTP error, state: " + response.status);
       }
-      const data = await response.json();
+      return (data = await response.json());
+    } catch (error) {
+      console.error("Failed to GET: " + error);
+    }
+  }
+  //? Get by Id
+  async getById(token, id) {
+    try {
+      const response = await fetch(`${this.baseURL}/${id}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      if (response.ok) {
-        return data;
-      } else {
+      if (!response.ok) {
         throw new Error("HTTP error, state: " + response.status);
       }
+      return (data = await response.json());
     } catch (error) {
-      console.error("Failed to GET " + error);
+      console.error("Failed to GET: " + error);
+    }
+  }
+  //? POST
+  //? PUT
+  async update(token, id, putJson) {
+    try {
+      const response = await fetch(`${this.baseURL}/edit/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(putJson),
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP error, state: " + response.status);
+      }
+      return await response.json();
+    } catch (error) {
+      console.log("Failed to PUT: " + error);
     }
   }
 }
@@ -30,25 +62,26 @@ class RestAPI {
 //* DOM scripts
 const token = localStorage.getItem("authToken");
 
-//? test GET
-const labAPI = new RestAPI("http://localhost:5005/api/Item");
+//?? GET
+const labAPI = new RestAPI("http://localhost:5005/LabManager/item/");
 const getBtn = document.getElementById("getBtn");
 
-getBtn.addEventListener("click", async (event) => {
+getBtn.addEventListener("click", async () => {
   try {
     const result = await labAPI.get(token);
     console.log(token);
     console.log(result);
     generateTable(result);
   } catch (error) {
-    console.error("Failed to get: " + error);
+    console.error("Failed to GET request: " + error);
     console.log(token);
   }
 });
 
+//? Generate Table of Items
 function generateTable(data) {
   var tableBody = document.getElementById("tableBody");
-  tableBody.innerHTML = ""; // Pulisce la tabella prima di popolarla
+  tableBody.innerHTML = "";
   data.forEach(function (item) {
     var row = `<tr>
         <td>${item.id}</td>
@@ -74,3 +107,43 @@ function generateTable(data) {
     tableBody.innerHTML += row;
   });
 }
+
+//?? PUT
+async function loadItemById(id, token) {
+  try {
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/item/");
+    const data = await restAPI.getById(id, token);
+    document.getElementById("editId").value = data.id;
+    document.getElementById("editName").value = data.itemName;
+    document.getElementById("editType").value = data.itemType;
+    document.getElementById("editDescription").value = data.description;
+    document.getElementById("editTechSpec").value = data.techSpec;
+    document.getElementById("editStatus").value = data.status;
+    document.getElementById("editRoomId").value = data.roomId;
+  } catch (error) {
+    console.error("Failed to load data: " + error);
+  }
+}
+
+const updateForm = document.getElementById("editForm");
+
+updateForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const itemId = document.getElementById("editId").value;
+  const itemData = {
+    id: itemId,
+    itemName: document.getElementById("editName").value,
+    itemType: document.getElementById("editType").value,
+    description: document.getElementById("editDescription").value,
+    techSpec: document.getElementById("editTechSpec").value,
+    status: document.getElementById("editStatus").value,
+    roomId: document.getElementById("editRoomId").value,
+  };
+
+  try {
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/item/");
+    const response = await restAPI.update(token, itemId, itemData);
+  } catch (error) {
+    console.error("Failed to update data: " + error);
+  }
+});

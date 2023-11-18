@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LabWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("LabManager/item")]
     public class ItemController : Controller
     {
         private readonly IItemRepository _itemRepository;
@@ -26,7 +26,7 @@ namespace LabWebAPI.Controllers
 
         //* GET Methods
         //TODO: add auth for user client
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(200, Type = typeof(Item))]
         public IActionResult GetItems()
         {
@@ -74,7 +74,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* POST Method
-        [HttpPost]
+        [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateItem([FromQuery] int softwareId, [FromBody] ItemDto itemCreate)
@@ -109,7 +109,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* PUT Method
-        [HttpPut("{itemId}")]
+        [HttpPut("edit/{itemId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -149,7 +149,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* DELETE Method
-        [HttpDelete("{itemId}")]
+        [HttpDelete("delete/{itemId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
