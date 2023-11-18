@@ -27,15 +27,15 @@
   <body>
     <header>
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg4 fg0">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">Laboratory Manager</a>
+          <a class="navbar-brand fg0" href="index.html">Laboratory Manager</a>
           <div class="navbar-nav me-auto">
-            <a class="nav-link" href="#">Item</a>
-            <a class="nav-link" href="#">LabUser</a>
-            <a class="nav-link" href="#">Reservation</a>
-            <a class="nav-link" href="#">Room</a>
-            <a class="nav-link" href="#">Software</a>
+            <a class="nav-link fg0" href="#">Item</a>
+            <a class="nav-link fg0" href="#">LabUser</a>
+            <a class="nav-link fg0" href="#">Reservation</a>
+            <a class="nav-link fg0" href="#">Room</a>
+            <a class="nav-link fg0" href="#">Software</a>
           </div>
           <div class="navbar-nav ms-auto">
             <a class="btn btn-primary me-2" id="loginBtn" href="html/login.html"
@@ -52,16 +52,17 @@
       </nav>
     </header>
     <main>
-      <div class="container-lg">
-        <div class="row row-cols-auto justify-content-start my_bg_1">
-          <div class="col-12"><h1>Items</h1></div>
-        </div>
-        <div class="row row-cols-auto justify-content-center my_bg_2">
-          <div class="col-9 align-self-center">
-            <h2>GET</h2>
-            <button id="myButton" class="btn btn-primary">Clicca qui</button>
+      <div class="container dev_fg">
+        <div class="row align-items-center my_bg_1">
+          <div class="col">
+            <h1>Items</h1>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-primary me-2" href="#">Add Items</a>
+            <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
           </div>
         </div>
+        <div class="content mt-3">My Content</div>
       </div>
     </main>
   </body>

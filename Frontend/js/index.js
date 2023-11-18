@@ -32,9 +32,9 @@ const token = localStorage.getItem("authToken");
 
 //? test GET
 const labAPI = new RestAPI("http://localhost:5005/api/Item");
-const testBtn = document.getElementById("myButton");
+const getBtn = document.getElementById("getBtn");
 
-testBtn.addEventListener("click", async (event) => {
+getBtn.addEventListener("click", async (event) => {
   try {
     const result = await labAPI.get(token);
     console.log(token);
