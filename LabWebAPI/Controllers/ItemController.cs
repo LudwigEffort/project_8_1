@@ -30,18 +30,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(Item))]
         public IActionResult GetItems()
         {
-            // if (!HttpContext.Items.ContainsKey("User"))
-            // {
-            //     return Unauthorized("Not authorized!");
-            // }
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
 
-            // var user = HttpContext.Items["User"] as LabUser;
+            var user = HttpContext.Items["User"] as LabUser;
 
-            // if (user == null || user.Role != "admin")
-            // {
-            //     return Unauthorized("Not authorized!");
-            // }
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
 
+            //? Item
             var items = _mapper.Map<List<ItemDto>>(_itemRepository.GetItems());
 
             if (!ModelState.IsValid)
@@ -57,7 +59,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetItemById(int itemId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
 
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Item
             if (!_itemRepository.ItemExists(itemId))
             {
                 return NotFound();
@@ -115,6 +130,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateItem(int itemId, [FromQuery] int softwareId, [FromBody] ItemDto itemUpdate)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Item
             if (itemUpdate == null)
             {
                 return BadRequest(ModelState);

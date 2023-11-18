@@ -15,7 +15,7 @@ class RestAPI {
       if (!response.ok) {
         throw new Error("HTTP error, state: " + response.status);
       }
-      return (data = await response.json());
+      return await response.json();
     } catch (error) {
       console.error("Failed to GET: " + error);
     }
@@ -31,7 +31,7 @@ class RestAPI {
       if (!response.ok) {
         throw new Error("HTTP error, state: " + response.status);
       }
-      return (data = await response.json());
+      return await response.json();
     } catch (error) {
       console.error("Failed to GET: " + error);
     }
@@ -63,7 +63,7 @@ class RestAPI {
 const token = localStorage.getItem("authToken");
 
 //?? GET
-const labAPI = new RestAPI("http://localhost:5005/LabManager/item/");
+const labAPI = new RestAPI("http://localhost:5005/LabManager/item/all");
 const getBtn = document.getElementById("getBtn");
 
 getBtn.addEventListener("click", async () => {
@@ -109,10 +109,10 @@ function generateTable(data) {
 }
 
 //?? PUT
-async function loadItemById(id, token) {
+async function loadItemById(token, id) {
   try {
-    const restAPI = new RestAPI("http://localhost:5005/LabManager/item/");
-    const data = await restAPI.getById(id, token);
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/item");
+    const data = await restAPI.getById(token, id);
     document.getElementById("editId").value = data.id;
     document.getElementById("editName").value = data.itemName;
     document.getElementById("editType").value = data.itemType;
@@ -147,3 +147,9 @@ updateForm.addEventListener("submit", async (event) => {
     console.error("Failed to update data: " + error);
   }
 });
+
+function editItem(id) {
+  loadItemById(id, token).then(() => {
+    document.getElementById("editContainer").style.display = "block";
+  });
+}
