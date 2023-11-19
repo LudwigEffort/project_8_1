@@ -21,6 +21,7 @@ namespace LabWebAPI.Helper
             CreateMap<ItemPostDto, Item>();
             CreateMap<Reservation, ReservationDto>();
             CreateMap<ReservationDto, Reservation>();
+            CreateMap<ReservationPostDto, Reservation>();
         }
     }
 }

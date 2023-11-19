@@ -67,7 +67,7 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateReservation([FromQuery] int itemId,
-        [FromQuery] int labUserId, ReservationDto createReservation)
+        [FromQuery] int labUserId, ReservationPostDto createReservation)
         {
             if (createReservation == null)
             {
