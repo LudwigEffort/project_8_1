@@ -22,7 +22,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- My Script -->
-    <script src="../js/item.js" defer></script>
+    <script src="../js/reservation.js" defer></script>
   </head>
   <body>
     <header>
@@ -58,30 +58,26 @@
       <div class="container dev_fg">
         <div class="row align-items-center my_bg_1">
           <div class="col">
-            <h1>Items</h1>
+            <h1>Lab Users</h1>
           </div>
           <div class="col-auto">
-            <a id="addItemBtn" class="btn btn-primary me-2" href="#"
-              >Add Items</a
+            <a id="addBtn" class="btn btn-primary me-2" href="#"
+              >Add Lab User</a
             >
-            <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
+            <a id="getBtn" class="btn btn-primary" href="#">Gets Lab Users</a>
           </div>
         </div>
-        <!-- GET Items Div -->
+        <!-- GET Rooms Div -->
         <div class="content mt-5">
           <table class="table">
             <thead class="thead-dark">
               <tr>
                 <th>ID</th>
-                <th>Nome Articolo</th>
-                <th>Tipo</th>
-                <th>Descrizione</th>
-                <th>Spec. Tecniche</th>
-                <th>ID Articolo</th>
-                <th>Stato</th>
-                <th>Data Creazione</th>
-                <th>ID Stanza</th>
-                <th>Software</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
                 <th>Edit</th>
                 <th>Delite</th>
               </tr>
@@ -90,104 +86,90 @@
           </table>
         </div>
 
-        <!-- Form Create Item -->
+        <!-- Form Create Lab User -->
         <div id="createContainer" class="mt-4" style="display: none">
-          <h3>Create Item</h3>
+          <h3>Create Lab User</h3>
           <div class="card card-body">
             <form id="createForm">
               <!-- Id -->
               <input type="hidden" id="createId" />
 
-              <!-- Item Name -->
+              <!-- First Name -->
               <div class="mb-3">
-                <label for="createName" class="form-label">Item Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createName"
-                  placeholder="Item Name"
-                />
-              </div>
-
-              <!-- Item Type -->
-              <div class="mb-3">
-                <label for="createType" class="form-label">Item Type</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createType"
-                  placeholder="Item Type"
-                />
-              </div>
-
-              <!-- Description -->
-              <div class="mb-3">
-                <label for="createDescription" class="form-label"
-                  >Description</label
-                >
-                <textarea
-                  class="form-control"
-                  id="createDescription"
-                  placeholder="Description"
-                ></textarea>
-              </div>
-
-              <!-- Tech Spec -->
-              <div class="mb-3">
-                <label for="createTechSpec" class="form-label">Tech Spec</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createTechSpec"
-                  placeholder="Tech Spec"
-                />
-              </div>
-
-              <!-- Item Identifier -->
-              <div class="mb-3">
-                <label for="editItemIdentifier" class="form-label"
-                  >Item Identifier</label
+                <label for="createFirstName" class="form-label"
+                  >First Name</label
                 >
                 <input
                   type="text"
                   class="form-control"
-                  id="createItemIdentifier"
-                  placeholder="Item Identifier"
+                  id="createFirstName"
+                  placeholder="First Name"
                 />
               </div>
 
-              <!-- Status -->
+              <!-- Last Name -->
               <div class="mb-3">
-                <label for="createStatus" class="form-label">Status</label>
+                <label for="createLastName" class="form-label">Last Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="createStatus"
-                  placeholder="Status"
+                  id="createLastName"
+                  placeholder="Last Name"
                 />
               </div>
 
-              <!-- Room -->
+              <!--  Email -->
               <div class="mb-3">
-                <label for="createRoomId" class="form-label">Room ID</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="createRoomId"
-                  placeholder="Room ID"
-                />
-              </div>
-
-              <!-- Softwares -->
-              <div class="mb-3">
-                <label for="createSoftwares" class="form-label"
-                  >Software IDs (separated by comma)</label
-                >
+                <label for="createEmail" class="form-label">Email</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="createSoftwares"
-                  placeholder="Eg: 1, 2, 3"
+                  id="createEmail"
+                  placeholder="Email"
+                />
+              </div>
+
+              <!-- Phone -->
+              <div class="mb-3">
+                <label for="createPhone" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createPhone"
+                  placeholder="Phone"
+                />
+              </div>
+
+              <!-- Role -->
+              <div class="mb-3">
+                <label for="createRole" class="form-label">Role</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createRole"
+                  placeholder="Role"
+                />
+              </div>
+
+              <!-- Role -->
+              <div class="mb-3">
+                <label for="createToken" class="form-label">Token</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createToken"
+                  placeholder="Token"
+                />
+              </div>
+
+              <!-- Token-->
+              <div class="mb-3">
+                <label for="editToken" class="form-label">Token</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editToken"
+                  placeholder="Token"
                 />
               </div>
 
@@ -202,104 +184,77 @@
           </div>
         </div>
 
-        <!-- Form Edit Item -->
+        <!-- Form Edit Lab User -->
         <div id="editContainer" class="mt-4" style="display: none">
-          <h3>Edit Item</h3>
+          <h3>Edit Lab User</h3>
           <div class="card card-body">
             <form id="editForm">
-              <!-- Id -->
+              <!-- Id Software -->
               <input type="hidden" id="editId" />
 
-              <!-- Item Name -->
+              <!-- First Name -->
               <div class="mb-3">
-                <label for="editName" class="form-label">Item Name</label>
+                <label for="editFirstName" class="form-label">First Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editName"
-                  placeholder="Item Name"
+                  id="editFirstName"
+                  placeholder="First Name"
                 />
               </div>
 
-              <!-- Item Type -->
+              <!-- Last Name -->
               <div class="mb-3">
-                <label for="editType" class="form-label">Item Type</label>
+                <label for="editLastName" class="form-label">Last Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editType"
-                  placeholder="Item Name"
+                  id="editLastName"
+                  placeholder="Last Name"
                 />
               </div>
 
-              <!-- Description -->
+              <!--  Email -->
               <div class="mb-3">
-                <label for="editDescription" class="form-label"
-                  >Description</label
-                >
-                <textarea
-                  class="form-control"
-                  id="editDescription"
-                  placeholder="Description"
-                ></textarea>
-              </div>
-
-              <!-- Tech Spec -->
-              <div class="mb-3">
-                <label for="editTechSpec" class="form-label">Tech Spec</label>
+                <label for="editEmail" class="form-label">Email</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editTechSpec"
-                  placeholder="Tech Spec"
+                  id="editEmail"
+                  placeholder="Email"
                 />
               </div>
 
-              <!-- Item Identifier -->
+              <!-- Phone -->
               <div class="mb-3">
-                <label for="editItemIdentifier" class="form-label"
-                  >Item Identifier</label
-                >
+                <label for="editPhone" class="form-label">Phone</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editItemIdentifier"
-                  placeholder="Item Identifier"
+                  id="editPhone"
+                  placeholder="Phone"
                 />
               </div>
 
-              <!-- Status -->
+              <!-- Role -->
               <div class="mb-3">
-                <label for="editStatus" class="form-label">Status</label>
+                <label for="editRole" class="form-label">Role</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editStatus"
-                  placeholder="Status"
+                  id="editRole"
+                  placeholder="Role"
                 />
               </div>
 
-              <!-- Room -->
+              <!-- Token-->
               <div class="mb-3">
-                <label for="editRoomId" class="form-label">Room ID</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="editRoomId"
-                  placeholder="Room ID"
-                />
-              </div>
-
-              <!-- Softwares -->
-              <div class="mb-3">
-                <label for="editSoftwares" class="form-label"
-                  >Software IDs (separated by comma)</label
-                >
+                <label for="editToken" class="form-label">Token</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editSoftwares"
-                  placeholder="Es: 1, 2, 3"
+                  id="editToken"
+                  placeholder="Token"
                 />
               </div>
 
