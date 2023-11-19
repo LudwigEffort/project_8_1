@@ -43,7 +43,7 @@ namespace LabWebAPI.Controllers
                 return Unauthorized("Not authorized!");
             }
 
-            //? Item all method
+            //? Item get all method
             var items = _mapper.Map<List<ItemDto>>(_itemRepository.GetItems());
 
             if (!ModelState.IsValid)

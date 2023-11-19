@@ -24,6 +24,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<LabUser>))]
         public IActionResult GetLabUsers()
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Lab user get all method
             var users = _mapper.Map<List<LabUserDto>>(_labUserRepository.GetLabUsers());
 
             if (!ModelState.IsValid)
@@ -39,6 +53,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetLabUserById(int labUserId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Lab user get by id method
             if (!_labUserRepository.LabUserExists(labUserId))
             {
                 return NotFound();
@@ -60,6 +88,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateLabUser([FromBody] LabUserDto createLabUser)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Lab user post method
             if (createLabUser == null)
             {
                 return BadRequest(ModelState);
@@ -102,6 +144,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateLabUser(int labUserId, [FromBody] LabUserDto updateLabUser)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Lab user put method
             if (updateLabUser == null)
             {
                 return BadRequest(ModelState);
@@ -142,6 +198,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult DeleteLabUser(int labUserId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Lab user delete method
             if (!_labUserRepository.LabUserExists(labUserId))
             {
                 return NotFound();
