@@ -92,7 +92,7 @@ namespace LabWebAPI.Controllers
         [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateItem([FromQuery] int softwareId, [FromBody] ItemDto itemCreate)
+        public IActionResult CreateItem([FromBody] ItemDto itemCreate)
         {
             if (itemCreate == null)
             {
@@ -114,7 +114,7 @@ namespace LabWebAPI.Controllers
 
             var itemMap = _mapper.Map<Item>(itemCreate);
 
-            if (!_itemRepository.CreateItem(softwareId, itemMap))
+            if (!_itemRepository.CreateItem(itemMap, itemCreate.Softwares))
             {
                 ModelState.AddModelError("", "Something wet wrong while saving item data");
                 return StatusCode(500, ModelState);

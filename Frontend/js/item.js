@@ -37,6 +37,26 @@ class RestAPI {
     }
   }
   //? POST
+  async create(postJson, token) {
+    try {
+      const response = await fetch(`${this.baseURL}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(postJson),
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP error, state: " + response.status);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.log("Failed to POST: " + error);
+    }
+  }
   //? PUT
   async update(id, putJson, token) {
     try {
@@ -109,6 +129,46 @@ function generateTable(data) {
     tableBody.innerHTML += row;
   });
 }
+
+//?? POST
+const createForm = document.getElementById("createForm");
+const createItemButton = document.getElementById("addItemBtn");
+
+createForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const softwareIds = document
+      .getElementById("createSoftwares")
+      .value.split(",")
+      .map((idStr) => idStr.trim())
+      .filter((idStr) => idStr.length > 0)
+      .map((trimmedIdStr) => parseInt(trimmedIdStr));
+
+    const softwareData = softwareIds.map((id) => {
+      return { id, softwareName: "string" };
+    });
+
+    const itemData = {
+      itemName: document.getElementById("createName").value,
+      itemType: document.getElementById("createType").value,
+      description: document.getElementById("createDescription").value,
+      techSpec: document.getElementById("createTechSpec").value,
+      itemIdentifier: document.getElementById("createItemIdentifier").value,
+      status: document.getElementById("createStatus").value,
+      roomId: parseInt(document.getElementById("createRoomId").value, 10),
+      softwares: softwareData,
+    };
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/item/create");
+    const result = await restAPI.create(itemData, token);
+    console.log(result);
+  } catch (error) {
+    console.error("Failed to create data: " + error);
+  }
+});
+
+createItemButton.addEventListener("click", () => {
+  document.getElementById("createContainer").style.display = "block";
+});
 
 //?? PUT
 async function loadItemById(id, token) {

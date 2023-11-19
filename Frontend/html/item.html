@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <!-- My CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <!-- Remove favicon 404 error -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
     <!-- Bootstrap Script -->
@@ -61,7 +61,9 @@
             <h1>Items</h1>
           </div>
           <div class="col-auto">
-            <a class="btn btn-primary me-2" href="#">Add Items</a>
+            <a id="addItemBtn" class="btn btn-primary me-2" href="#"
+              >Add Items</a
+            >
             <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
           </div>
         </div>
@@ -87,7 +89,119 @@
             <tbody id="tableBody"></tbody>
           </table>
         </div>
+
         <!-- Form Create Item -->
+        <div id="createContainer" class="mt-4" style="display: none">
+          <h3>Create Item</h3>
+          <div class="card card-body">
+            <form id="createForm">
+              <!-- Id -->
+              <input type="hidden" id="createId" />
+
+              <!-- Item Name -->
+              <div class="mb-3">
+                <label for="createName" class="form-label">Item Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createName"
+                  placeholder="Item Name"
+                />
+              </div>
+
+              <!-- Item Type -->
+              <div class="mb-3">
+                <label for="createType" class="form-label">Item Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createType"
+                  placeholder="Item Type"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="createDescription" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="createDescription"
+                  placeholder="Description"
+                ></textarea>
+              </div>
+
+              <!-- Tech Spec -->
+              <div class="mb-3">
+                <label for="createTechSpec" class="form-label">Tech Spec</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createTechSpec"
+                  placeholder="Tech Spec"
+                />
+              </div>
+
+              <!-- Item Identifier -->
+              <div class="mb-3">
+                <label for="editItemIdentifier" class="form-label"
+                  >Item Identifier</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createItemIdentifier"
+                  placeholder="Item Identifier"
+                />
+              </div>
+
+              <!-- Status -->
+              <div class="mb-3">
+                <label for="createStatus" class="form-label">Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createStatus"
+                  placeholder="Status"
+                />
+              </div>
+
+              <!-- Room -->
+              <div class="mb-3">
+                <label for="createRoomId" class="form-label">Room ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="createRoomId"
+                  placeholder="Room ID"
+                />
+              </div>
+
+              <!-- Softwares -->
+              <div class="mb-3">
+                <label for="createSoftwares" class="form-label"
+                  >Software IDs (separated by comma)</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="createSoftwares"
+                  placeholder="Eg: 1, 2, 3"
+                />
+              </div>
+
+              <!-- Pulsanti -->
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
         <!-- Form Edit Item -->
         <div id="editContainer" class="mt-4" style="display: none">
           <h3>Edit Item</h3>
@@ -103,7 +217,7 @@
                   type="text"
                   class="form-control"
                   id="editName"
-                  placeholder="Nome Articolo"
+                  placeholder="Item Name"
                 />
               </div>
 
@@ -114,7 +228,7 @@
                   type="text"
                   class="form-control"
                   id="editType"
-                  placeholder="Tipo Articolo"
+                  placeholder="Item Name"
                 />
               </div>
 
@@ -126,7 +240,7 @@
                 <textarea
                   class="form-control"
                   id="editDescription"
-                  placeholder="Descrizione"
+                  placeholder="Description"
                 ></textarea>
               </div>
 
@@ -137,7 +251,7 @@
                   type="text"
                   class="form-control"
                   id="editTechSpec"
-                  placeholder="Specifiche Tecniche"
+                  placeholder="Tech Spec"
                 />
               </div>
 

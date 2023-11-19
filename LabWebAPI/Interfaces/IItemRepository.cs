@@ -10,7 +10,7 @@ namespace LabWebAPI.Interfaces
         Item GetItemById(int itemId);
 
         //* Create Methods
-        bool CreateItem(int softwareId, Item item);
+        bool CreateItem(Item item, List<SoftwareDto> softwares);
 
         //* Update Method
         bool UpdateItem(Item item, List<SoftwareDto> softwares);

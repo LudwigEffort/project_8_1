@@ -21,19 +21,16 @@ namespace LabWebAPI.Repositories
                 .FirstOrDefault();
         }
 
-        public bool CreateItem(int softwareId, Item item)
+        public bool CreateItem(Item item, List<SoftwareDto> softwares)
         {
-            var software = _context.Softwares.Where(s => s.Id == softwareId).FirstOrDefault();
-
-            var itemSoftware = new ItemSoftware()
+            foreach (var softtwareDto in softwares)
             {
-                Item = item,
-                Software = software,
-            };
-
-            _context.Add(itemSoftware);
-
-            //_context.Add(roomId);
+                var software = _context.Softwares.FirstOrDefault(s => s.Id == softtwareDto.Id);
+                if (software != null)
+                {
+                    _context.ItemSoftwares.Add(new ItemSoftware { ItemId = item.Id, SoftwareId = software.Id });
+                }
+            }
 
             _context.Add(item);
 
