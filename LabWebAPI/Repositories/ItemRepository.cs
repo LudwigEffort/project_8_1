@@ -70,7 +70,7 @@ namespace LabWebAPI.Repositories
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateItem(int softwareId, Item item, List<SoftwareDto> softwares)
+        public bool UpdateItem(Item item, List<SoftwareDto> softwares)
         {
             var existingAssociations = _context.ItemSoftwares.Where(a => a.ItemId == item.Id);
             _context.ItemSoftwares.RemoveRange(existingAssociations);

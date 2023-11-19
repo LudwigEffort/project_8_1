@@ -13,7 +13,7 @@ namespace LabWebAPI.Interfaces
         bool CreateItem(int softwareId, Item item);
 
         //* Update Method
-        bool UpdateItem(int softwareId, Item item, List<SoftwareDto> softwares);
+        bool UpdateItem(Item item, List<SoftwareDto> softwares);
 
         //* Delete Method
         bool DeleteItem(Item item);

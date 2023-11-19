@@ -128,7 +128,7 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateItem(int itemId, [FromQuery] int softwareId, [FromBody] ItemDto itemUpdate)
+        public IActionResult UpdateItem(int itemId, [FromBody] ItemDto itemUpdate)
         {
             //? Auth
             // if (!HttpContext.Items.ContainsKey("User"))
@@ -168,7 +168,7 @@ namespace LabWebAPI.Controllers
 
             _mapper.Map(itemUpdate, itemFromDb);
 
-            if (!_itemRepository.UpdateItem(softwareId, itemFromDb, itemUpdate.Softwares))
+            if (!_itemRepository.UpdateItem(itemFromDb, itemUpdate.Softwares))
             {
                 ModelState.AddModelError("", "Some went wrong while updating data");
                 return StatusCode(500, ModelState);
