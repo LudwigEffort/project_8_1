@@ -142,11 +142,16 @@ Le sovraposizioni le gestisco tramite una query linq, non ho ancora implentato g
 + [-] Login page
   + [-] Login form
   + [ ] Log out (clear local storage)
-+ [ ] SignUp page
-+ [ ] Lab page
-  + [ ] Item CRUD
++ [-] SignUp page
++ [-] Lab page
+  + [-] Item CRUD
   + [ ] LabUser CRUD
   + [ ] Reservation CRUD
   + [ ] Room CRUD
   + [ ] Software CRUD
 *** Tests
+*** Not Implement
++ Tests
++ Token expires
++ Booking by Time slot
++

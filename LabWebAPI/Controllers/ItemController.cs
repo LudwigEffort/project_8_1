@@ -168,7 +168,7 @@ namespace LabWebAPI.Controllers
 
             _mapper.Map(itemUpdate, itemFromDb);
 
-            if (!_itemRepository.UpdateItem(softwareId, itemFromDb))
+            if (!_itemRepository.UpdateItem(softwareId, itemFromDb, itemUpdate.Softwares))
             {
                 ModelState.AddModelError("", "Some went wrong while updating data");
                 return StatusCode(500, ModelState);

@@ -70,8 +70,20 @@ namespace LabWebAPI.Repositories
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateItem(int softwareId, Item item)
+        public bool UpdateItem(int softwareId, Item item, List<SoftwareDto> softwares)
         {
+            var existingAssociations = _context.ItemSoftwares.Where(a => a.ItemId == item.Id);
+            _context.ItemSoftwares.RemoveRange(existingAssociations);
+
+            foreach (var softtwareDto in softwares)
+            {
+                var software = _context.Softwares.FirstOrDefault(s => s.Id == softtwareDto.Id);
+                if (software != null)
+                {
+                    _context.ItemSoftwares.Add(new ItemSoftware { ItemId = item.Id, SoftwareId = software.Id });
+                }
+            }
+
             _context.Update(item);
             return Save();
         }

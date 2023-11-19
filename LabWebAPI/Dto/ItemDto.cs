@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.SignalR;
-
 namespace LabWebAPI.Dto
 {
     public class ItemDto
