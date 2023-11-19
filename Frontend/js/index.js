@@ -52,7 +52,10 @@ class RestAPI {
       if (!response.ok) {
         throw new Error("HTTP error, state: " + response.status);
       }
-      return await response.json();
+
+      if (response.status === 204) {
+        console.log("Update data successful");
+      }
     } catch (error) {
       console.log("Failed to PUT: " + error);
     }
