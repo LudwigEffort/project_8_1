@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LabWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("LabManager/labUser")]
     public class LabUserController : Controller
     {
         private readonly ILabUserRepository _labUserRepository;
@@ -20,7 +20,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* GET Methods
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<LabUser>))]
         public IActionResult GetLabUsers()
         {
@@ -55,7 +55,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* POST Method
-        [HttpPost]
+        [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateLabUser([FromBody] LabUserDto createLabUser)
@@ -96,7 +96,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* PUT Method
-        [HttpPut("{labUserId}")]
+        [HttpPut("edit/{labUserId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -136,7 +136,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* DELETE Method
-        [HttpDelete("{labUserId}")]
+        [HttpDelete("delete/{labUserId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
