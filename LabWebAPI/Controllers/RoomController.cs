@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LabWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("LabManager/room")]
     public class RoomController : Controller
     {
         private readonly IRoomRepository _roomRepository;
@@ -20,11 +20,24 @@ namespace LabWebAPI.Controllers
         }
 
         //* GET Methods
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Room>))]
         public IActionResult GetRooms()
         {
+            //? Auth
+            // if (!HttpContext.Items.ContainsKey("User"))
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
+            // var user = HttpContext.Items["User"] as LabUser;
+
+            // if (user == null || (user.Role != "admin" && user.Role != "client"))
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
+
+            //? Romm get method         
             var rooms = _mapper.Map<List<RoomDto>>(_roomRepository.GetRooms());
 
             if (!ModelState.IsValid)
@@ -56,7 +69,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* POST Method
-        [HttpPost]
+        [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateRoom([FromBody] RoomDto createRoom)
@@ -96,7 +109,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* PUT Method
-        [HttpPut("{roomId}")]
+        [HttpPut("edit/{roomId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -136,7 +149,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* DELETE Method
-        [HttpDelete("{roomId}")]
+        [HttpDelete("delete/{roomId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
