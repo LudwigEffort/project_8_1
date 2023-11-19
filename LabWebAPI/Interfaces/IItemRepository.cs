@@ -1,3 +1,4 @@
+using LabWebAPI.Controllers;
 using LabWebAPI.Dto;
 using LabWebAPI.Model;
 
@@ -22,5 +23,6 @@ namespace LabWebAPI.Interfaces
         bool ItemExists(int itemId);
         bool Save();
         Item CheckItemIfExists(ItemDto itemCreate);
+        Item CheckItemIfExists(ItemPostDto itemCreate);
     }
 }

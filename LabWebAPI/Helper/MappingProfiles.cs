@@ -1,4 +1,5 @@
 using AutoMapper;
+using LabWebAPI.Controllers;
 using LabWebAPI.Dto;
 using LabWebAPI.Model;
 
@@ -17,6 +18,7 @@ namespace LabWebAPI.Helper
             CreateMap<Item, ItemDto>()
                 .ForMember(dest => dest.Softwares, opt => opt.MapFrom(src => src.ItemSoftwares.Select(isr => isr.Software)));
             CreateMap<ItemDto, Item>();
+            CreateMap<ItemPostDto, Item>();
             CreateMap<Reservation, ReservationDto>();
             CreateMap<ReservationDto, Reservation>();
         }

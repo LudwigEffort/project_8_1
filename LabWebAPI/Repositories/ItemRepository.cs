@@ -1,3 +1,4 @@
+using LabWebAPI.Controllers;
 using LabWebAPI.Data;
 using LabWebAPI.Dto;
 using LabWebAPI.Interfaces;
@@ -21,8 +22,20 @@ namespace LabWebAPI.Repositories
                 .FirstOrDefault();
         }
 
+        public Item CheckItemIfExists(ItemPostDto itemCreate)
+        {
+            return GetItems().Where(i => i.ItemIdentifier.Trim().ToUpper() == itemCreate.ItemIdentifier.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+        }
+
         public bool CreateItem(Item item, List<SoftwareDto> softwares)
         {
+            _context.Add(item);
+            bool saved = Save();
+
+            if (!saved) return false;
+
             foreach (var softtwareDto in softwares)
             {
                 var software = _context.Softwares.FirstOrDefault(s => s.Id == softtwareDto.Id);
@@ -31,8 +44,6 @@ namespace LabWebAPI.Repositories
                     _context.ItemSoftwares.Add(new ItemSoftware { ItemId = item.Id, SoftwareId = software.Id });
                 }
             }
-
-            _context.Add(item);
 
             return Save();
         }
