@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab Manager</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Remove favicon 404 error -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <!-- Bootstrap Script -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!-- My Script -->
+    <script src="../js/item.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg4 fg0">
+        <div class="container-fluid">
+          <a class="navbar-brand fg0" href="../index.html"
+            >Laboratory Manager</a
+          >
+          <div class="navbar-nav me-auto">
+            <a class="nav-link fg0" href="item.html">Item</a>
+            <a class="nav-link fg0" href="#">LabUser</a>
+            <a class="nav-link fg0" href="#">Reservation</a>
+            <a class="nav-link fg0" href="#">Room</a>
+            <a class="nav-link fg0" href="#">Software</a>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <a class="btn btn-primary me-2" id="loginBtn" href="login.html"
+              >Login</a
+            >
+            <a
+              class="btn btn-primary me-2"
+              id="signupBtn"
+              href="html/signup.html"
+              >SignUp</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <!-- Items Container -->
+      <div class="container dev_fg">
+        <div class="row align-items-center my_bg_1">
+          <div class="col">
+            <h1>Items</h1>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-primary me-2" href="#">Add Items</a>
+            <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
+          </div>
+        </div>
+        <!-- GET Items Div -->
+        <div class="content mt-5">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nome Articolo</th>
+                <th>Tipo</th>
+                <th>Descrizione</th>
+                <th>Spec. Tecniche</th>
+                <th>ID Articolo</th>
+                <th>Stato</th>
+                <th>Data Creazione</th>
+                <th>ID Stanza</th>
+                <th>Software</th>
+                <th>Edit</th>
+                <th>Delite</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+        <!-- Form Create Item -->
+        <!-- Form Edit Item -->
+        <div id="editContainer" class="mt-4" style="display: none">
+          <h3>Edit Item</h3>
+          <div class="card card-body">
+            <form id="editForm">
+              <!-- Id -->
+              <input type="" id="editId" />
+
+              <!-- Item Name -->
+              <div class="mb-3">
+                <label for="editName" class="form-label">Item Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editName"
+                  placeholder="Nome Articolo"
+                />
+              </div>
+
+              <!-- Item Type -->
+              <div class="mb-3">
+                <label for="editType" class="form-label">Item Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editType"
+                  placeholder="Tipo Articolo"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="editDescription" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="editDescription"
+                  placeholder="Descrizione"
+                ></textarea>
+              </div>
+
+              <!-- Tech Spec -->
+              <div class="mb-3">
+                <label for="editTechSpec" class="form-label">Tech Spec</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editTechSpec"
+                  placeholder="Specifiche Tecniche"
+                />
+              </div>
+
+              <!-- Item Identifier -->
+              <div class="mb-3">
+                <label for="editItemIdentifier" class="form-label"
+                  >Item Identifier</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editItemIdentifier"
+                  placeholder="Item Identifier"
+                />
+              </div>
+
+              <!-- Status -->
+              <div class="mb-3">
+                <label for="editStatus" class="form-label">Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editStatus"
+                  placeholder="Status"
+                />
+              </div>
+
+              <!-- Room -->
+              <div class="mb-3">
+                <label for="editRoomId" class="form-label">Room ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="editRoomId"
+                  placeholder="Room ID"
+                />
+              </div>
+
+              <!-- Softwares -->
+              <div class="mb-3">
+                <label for="editSoftwares" class="form-label"
+                  >Software IDs (separated by comma)</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editSoftwares"
+                  placeholder="Es: 1, 2, 3"
+                />
+              </div>
+
+              <!-- Pulsanti -->
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

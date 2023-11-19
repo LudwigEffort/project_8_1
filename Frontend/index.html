@@ -31,7 +31,7 @@
         <div class="container-fluid">
           <a class="navbar-brand fg0" href="index.html">Laboratory Manager</a>
           <div class="navbar-nav me-auto">
-            <a class="nav-link fg0" href="#">Item</a>
+            <a class="nav-link fg0" href="html/item.html">Item</a>
             <a class="nav-link fg0" href="#">LabUser</a>
             <a class="nav-link fg0" href="#">Reservation</a>
             <a class="nav-link fg0" href="#">Room</a>
@@ -56,147 +56,15 @@
       <div class="container dev_fg">
         <div class="row align-items-center my_bg_1">
           <div class="col">
-            <h1>Items</h1>
+            <h1>Make Reservation</h1>
           </div>
           <div class="col-auto">
-            <a class="btn btn-primary me-2" href="#">Add Items</a>
+            <a class="btn btn-primary me-2" href="#">Create Reservation</a>
             <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
           </div>
         </div>
         <!-- GET Items Div -->
-        <div class="content mt-5">
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th>ID</th>
-                <th>Nome Articolo</th>
-                <th>Tipo</th>
-                <th>Descrizione</th>
-                <th>Spec. Tecniche</th>
-                <th>ID Articolo</th>
-                <th>Stato</th>
-                <th>Data Creazione</th>
-                <th>ID Stanza</th>
-                <th>Software</th>
-                <th>Edit</th>
-                <th>Delite</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-          </table>
-        </div>
-        <!-- Form Create Item -->
-        <!-- Form Edit Item -->
-        <div id="editContainer" class="mt-4" style="display: none">
-          <h3>Edit Item</h3>
-          <div class="card card-body">
-            <form id="editForm">
-              <!-- Id -->
-              <input type="" id="editId" />
-
-              <!-- Item Name -->
-              <div class="mb-3">
-                <label for="editName" class="form-label">Item Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editName"
-                  placeholder="Nome Articolo"
-                />
-              </div>
-
-              <!-- Item Type -->
-              <div class="mb-3">
-                <label for="editType" class="form-label">Item Type</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editType"
-                  placeholder="Tipo Articolo"
-                />
-              </div>
-
-              <!-- Description -->
-              <div class="mb-3">
-                <label for="editDescription" class="form-label"
-                  >Description</label
-                >
-                <textarea
-                  class="form-control"
-                  id="editDescription"
-                  placeholder="Descrizione"
-                ></textarea>
-              </div>
-
-              <!-- Tech Spec -->
-              <div class="mb-3">
-                <label for="editTechSpec" class="form-label">Tech Spec</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editTechSpec"
-                  placeholder="Specifiche Tecniche"
-                />
-              </div>
-
-              <!-- Item Identifier -->
-              <div class="mb-3">
-                <label for="editItemIdentifier" class="form-label"
-                  >Item Identifier</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editItemIdentifier"
-                  placeholder="Item Identifier"
-                />
-              </div>
-
-              <!-- Status -->
-              <div class="mb-3">
-                <label for="editStatus" class="form-label">Status</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editStatus"
-                  placeholder="Status"
-                />
-              </div>
-
-              <!-- Room -->
-              <div class="mb-3">
-                <label for="editRoomId" class="form-label">Room ID</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="editRoomId"
-                  placeholder="Room ID"
-                />
-              </div>
-
-              <!-- Softwares -->
-              <div class="mb-3">
-                <label for="editSoftwares" class="form-label"
-                  >Software IDs (separated by comma)</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editSoftwares"
-                  placeholder="Es: 1, 2, 3"
-                />
-              </div>
-
-              <!-- Pulsanti -->
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary me-2">
-                  Cancel
-                </button>
-                <button type="submit" class="btn btn-primary">Edit</button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <div class="content mt-5"></div>
       </div>
     </main>
   </body>
