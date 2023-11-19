@@ -25,19 +25,19 @@ namespace LabWebAPI.Controllers
         public IActionResult GetRooms()
         {
             //? Auth
-            // if (!HttpContext.Items.ContainsKey("User"))
-            // {
-            //     return Unauthorized("Not authorized!");
-            // }
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
 
-            // var user = HttpContext.Items["User"] as LabUser;
+            var user = HttpContext.Items["User"] as LabUser;
 
-            // if (user == null || (user.Role != "admin" && user.Role != "client"))
-            // {
-            //     return Unauthorized("Not authorized!");
-            // }
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
 
-            //? Romm get method         
+            //? Room get method         
             var rooms = _mapper.Map<List<RoomDto>>(_roomRepository.GetRooms());
 
             if (!ModelState.IsValid)
@@ -53,6 +53,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetSoftwareById(int roomId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Room get by id method
             if (!_roomRepository.RoomExsits(roomId))
             {
                 return NotFound();
@@ -74,6 +88,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateRoom([FromBody] RoomDto createRoom)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Room post method
             if (createRoom == null)
             {
                 return BadRequest(ModelState);
@@ -115,6 +143,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateRoom(int roomId, [FromBody] RoomDto updateRoom)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Room put method
             if (updateRoom == null)
             {
                 return BadRequest(ModelState);
@@ -155,6 +197,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult DeleteRoom(int roomId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Room delete method
             if (!_roomRepository.RoomExsits(roomId))
             {
                 return NotFound();
