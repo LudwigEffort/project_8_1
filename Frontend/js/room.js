@@ -105,3 +105,33 @@ class RestAPI {
 
 //* DOM scripts
 const token = localStorage.getItem("authToken");
+
+//?? GET
+const labAPI = new RestAPI("http://localhost:5005/LabManager/room/all");
+const getBtn = document.getElementById("getBtn");
+
+getBtn.addEventListener("click", async () => {
+  try {
+    const result = await labAPI.get(token);
+    console.log(token);
+    generateTable(result);
+  } catch (error) {
+    console.error("Failed to GET request: " + error);
+    console.log(token);
+  }
+});
+
+function generateTable(data) {
+  var tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+
+  data.forEach(function (item) {
+    var row = `<tr>
+        <td>${item.id}</td>
+        <td>${item.roomName}</td>
+        <td><button class="btn btn-primary btn-sm" onclick="editItem(${item.id})">Edit</button></td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteItem(${item.id})">Delete</button></td>
+    </tr>`;
+    tableBody.innerHTML += row;
+  });
+}
