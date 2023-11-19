@@ -160,3 +160,54 @@ createForm.addEventListener("submit", async (event) => {
 createItemButton.addEventListener("click", () => {
   document.getElementById("createContainer").style.display = "block";
 });
+
+//?? PUT
+async function loadItemById(id, token) {
+  try {
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/software");
+    const data = await restAPI.getById(id, token);
+    document.getElementById("editId").value = data.id;
+    document.getElementById("editName").value = data.softwareName;
+  } catch (error) {
+    console.error("Failed to load data: " + error);
+  }
+}
+
+const updateForm = document.getElementById("editForm");
+
+updateForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const itemId = document.getElementById("editId").value;
+    const itemData = {
+      id: parseInt(itemId, 10),
+      softwareName: document.getElementById("editName").value,
+    };
+
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/software");
+
+    const reusult = await restAPI.update(itemId, itemData, token);
+    console.log(reusult);
+  } catch (error) {
+    console.error("Failed to update data: " + error);
+  }
+});
+
+function editItem(id) {
+  loadItemById(id, token).then(() => {
+    document.getElementById("editContainer").style.display = "block";
+  });
+}
+
+//?? DELETE
+async function deleteItem(id) {
+  try {
+    const restAPI = new RestAPI(
+      "http://localhost:5005/LabManager/software/delete"
+    );
+    await restAPI.delete(id, token);
+    console.log("Item delete");
+  } catch (error) {
+    console.error("Failed to delete item: " + error);
+  }
+}
