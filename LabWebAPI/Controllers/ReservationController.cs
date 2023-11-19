@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LabWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("LabManager/reservation")]
     public class ReservationController : ControllerBase
     {
         private readonly IItemRepository _itemRepository;
@@ -28,7 +28,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* GET Methods
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Reservation>))]
         public IActionResult GetReservations()
         {
@@ -63,7 +63,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* POST Method
-        [HttpPost]
+        [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateReservation([FromQuery] int itemId,
@@ -107,7 +107,8 @@ namespace LabWebAPI.Controllers
             return Ok("Successfully created");
         }
 
-        [HttpDelete("{reservationId}")]
+        //* DELETE Method
+        [HttpDelete("delete/{reservationId}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
