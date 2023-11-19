@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LabWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("LabManager/software")]
     public class SoftwareController : Controller
     {
         private readonly ISoftwareRepository _softwareRepository;
@@ -20,7 +20,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* GET methods
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Software>))]
         public IActionResult GetSoftwares()
         {
@@ -57,7 +57,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* POST method
-        [HttpPost]
+        [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateSoftware([FromBody] SoftwareDto createSoftware)
@@ -95,7 +95,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* PUT method
-        [HttpPut("{softwareId}")]
+        [HttpPut("edit/{softwareId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -134,7 +134,7 @@ namespace LabWebAPI.Controllers
         }
 
         //* DELETE method
-        [HttpDelete("{softwareId}")]
+        [HttpDelete("delete/{softwareId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

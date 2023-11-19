@@ -58,11 +58,13 @@
       <div class="container dev_fg">
         <div class="row align-items-center my_bg_1">
           <div class="col">
-            <h1>Rooms</h1>
+            <h1>Softwares</h1>
           </div>
           <div class="col-auto">
-            <a id="addBtn" class="btn btn-primary me-2" href="#">Add Room</a>
-            <a id="getBtn" class="btn btn-primary" href="#">Gets Rooms</a>
+            <a id="addBtn" class="btn btn-primary me-2" href="#"
+              >Add Software</a
+            >
+            <a id="getBtn" class="btn btn-primary" href="#">Gets Softwares</a>
           </div>
         </div>
         <!-- GET Rooms Div -->
@@ -71,7 +73,7 @@
             <thead class="thead-dark">
               <tr>
                 <th>ID</th>
-                <th>Room Name</th>
+                <th>Software Name</th>
                 <th>Edit</th>
                 <th>Delite</th>
               </tr>
@@ -88,14 +90,14 @@
               <!-- Id -->
               <input type="hidden" id="createId" />
 
-              <!-- Item Name -->
+              <!-- Software Name -->
               <div class="mb-3">
-                <label for="createName" class="form-label">Room Name</label>
+                <label for="createName" class="form-label">Software Name</label>
                 <input
                   type="text"
                   class="form-control"
                   id="createName"
-                  placeholder="Room Name"
+                  placeholder="Software Name"
                 />
               </div>
 
@@ -115,17 +117,17 @@
           <h3>Edit Item</h3>
           <div class="card card-body">
             <form id="editForm">
-              <!-- Id Room -->
+              <!-- Id Software -->
               <input type="hidden" id="editId" />
 
-              <!-- Room Name -->
+              <!-- Software Name -->
               <div class="mb-3">
                 <label for="editName" class="form-label">Room Name</label>
                 <input
                   type="text"
                   class="form-control"
                   id="editName"
-                  placeholder="Room Name"
+                  placeholder="Software Name"
                 />
               </div>
 
