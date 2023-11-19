@@ -40,11 +40,7 @@ class RestAPI {
   //? PUT
   async update(id, putJson, token) {
     try {
-      let url = new URL(`${this.baseURL}/edit/${id}`);
-
-      console.log("URL:", url.toString());
-
-      const response = await fetch(url, {
+      const response = await fetch(`${this.baseURL}/edit/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -121,6 +117,7 @@ async function loadItemById(id, token) {
     document.getElementById("editType").value = data.itemType;
     document.getElementById("editDescription").value = data.description;
     document.getElementById("editTechSpec").value = data.techSpec;
+    document.getElementById("editItemIdentifier").value = data.itemIdentifier;
     document.getElementById("editStatus").value = data.status;
     document.getElementById("editRoomId").value = data.roomId;
     document.getElementById("editSoftwares").value = data.softwares
@@ -135,38 +132,36 @@ const updateForm = document.getElementById("editForm");
 
 updateForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const itemId = document.getElementById("editId").value;
-
-  const softwareIds = document
-    .getElementById("editSoftwares")
-    .value.split(",")
-    .map((idStr) => idStr.trim())
-    .filter((idStr) => idStr.length > 0)
-    .map((trimmedIdStr) => parseInt(trimmedIdStr));
-
-  const softwareData = softwareIds.map((id) => {
-    return { id, softwareName: "string" };
-  });
-
-  const itemData = {
-    id: parseInt(itemId, 10),
-    itemName: document.getElementById("editName").value,
-    itemType: document.getElementById("editType").value,
-    description: document.getElementById("editDescription").value,
-    techSpec: document.getElementById("editTechSpec").value,
-    status: document.getElementById("editStatus").value,
-    roomId: parseInt(document.getElementById("editRoomId").value, 10),
-    softwares: softwareData,
-  };
-
   try {
+    const itemId = document.getElementById("editId").value;
+
+    const softwareIds = document
+      .getElementById("editSoftwares")
+      .value.split(",")
+      .map((idStr) => idStr.trim())
+      .filter((idStr) => idStr.length > 0)
+      .map((trimmedIdStr) => parseInt(trimmedIdStr));
+
+    const softwareData = softwareIds.map((id) => {
+      return { id, softwareName: "string" };
+    });
+
+    const itemData = {
+      id: parseInt(itemId, 10),
+      itemName: document.getElementById("editName").value,
+      itemType: document.getElementById("editType").value,
+      description: document.getElementById("editDescription").value,
+      techSpec: document.getElementById("editTechSpec").value,
+      itemIdentifier: document.getElementById("editItemIdentifier").value,
+      status: document.getElementById("editStatus").value,
+      roomId: parseInt(document.getElementById("editRoomId").value, 10),
+      softwares: softwareData,
+    };
+
     const restAPI = new RestAPI("http://localhost:5005/LabManager/item");
-    const response = await restAPI.update(itemId, itemData, token);
-    if (response.ok) {
-      alert("Item updated successfully!");
-    } else {
-      alert("Error updating item");
-    }
+
+    const reusult = await restAPI.update(itemId, itemData, token);
+    console.log(reusult);
   } catch (error) {
     console.error("Failed to update data: " + error);
   }
