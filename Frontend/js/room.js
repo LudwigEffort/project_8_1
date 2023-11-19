@@ -135,3 +135,27 @@ function generateTable(data) {
     tableBody.innerHTML += row;
   });
 }
+
+//?? POST
+const createForm = document.getElementById("createForm");
+const createItemButton = document.getElementById("addBtn");
+
+createForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const itemData = {
+      // id: document.getElementById("createId").value,
+      id: parseInt(0, 10),
+      roomName: document.getElementById("createName").value,
+    };
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/room/create");
+    const result = await restAPI.create(itemData, token);
+    console.log(result);
+  } catch (error) {
+    console.error("Failed to create data: " + error);
+  }
+});
+
+createItemButton.addEventListener("click", () => {
+  document.getElementById("createContainer").style.display = "block";
+});

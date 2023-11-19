@@ -105,7 +105,7 @@ namespace LabWebAPI.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("Successfully created");
+            return Ok(new { roomMap.Id, Message = "Successfully created" });
         }
 
         //* PUT Method
