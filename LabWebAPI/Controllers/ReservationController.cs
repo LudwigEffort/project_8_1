@@ -66,8 +66,7 @@ namespace LabWebAPI.Controllers
         [HttpPost("create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateReservation([FromQuery] int itemId,
-        [FromQuery] int labUserId, ReservationPostDto createReservation)
+        public IActionResult CreateReservation([FromBody] ReservationPostDto createReservation)
         {
             if (createReservation == null)
             {
@@ -77,7 +76,7 @@ namespace LabWebAPI.Controllers
             DateTime startTime = DateTime.Now;
             DateTime endTime = startTime.AddHours(2);
 
-            if (!_reservationRepository.IsReservationAvailable(itemId, startTime, endTime))
+            if (!_reservationRepository.IsReservationAvailable(createReservation.ItemId, startTime, endTime))
             {
                 ModelState.AddModelError("", "Reservation for that time already exists");
                 return StatusCode(422, ModelState);
@@ -93,10 +92,6 @@ namespace LabWebAPI.Controllers
             reservationMap.StartTime = startTime;
             reservationMap.EndTime = endTime;
             reservationMap.ReservationStatus = "Active";
-            reservationMap.ItemId = itemId;
-            reservationMap.LabUserId = labUserId;
-            reservationMap.Item = _itemRepository.GetItemById(itemId);
-            reservationMap.LabUser = _labUserRepository.GetLabUserById(labUserId);
 
             if (!_reservationRepository.CreateReservation(reservationMap))
             {
