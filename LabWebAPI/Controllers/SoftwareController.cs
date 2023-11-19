@@ -24,7 +24,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Software>))]
         public IActionResult GetSoftwares()
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
 
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Software get method
             var softwares = _mapper.Map<List<SoftwareDto>>(_softwareRepository.GetSoftwares());
 
             if (!ModelState.IsValid)
@@ -40,7 +53,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetSoftwareById(int softwareId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
 
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Software get by id method
             if (!_softwareRepository.SoftwareExists(softwareId))
             {
                 return NotFound();
@@ -62,6 +88,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateSoftware([FromBody] SoftwareDto createSoftware)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Software post method
             if (createSoftware == null)
             {
                 return BadRequest(ModelState);
@@ -91,7 +131,7 @@ namespace LabWebAPI.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("Successfully created");
+            return Ok(new { softwareMap.Id, Message = "Successfully created" });
         }
 
         //* PUT method
@@ -101,6 +141,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateSfotware(int softwareId, [FromBody] SoftwareDto updateSoftware)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Software put method
             if (updateSoftware == null)
             {
                 return BadRequest(ModelState);
@@ -140,6 +194,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult DeleteSoftware(int softwareId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Software delete method
             if (!_softwareRepository.SoftwareExists(softwareId))
             {
                 return NotFound();
