@@ -197,3 +197,14 @@ function editItem(id) {
     document.getElementById("editContainer").style.display = "block";
   });
 }
+
+//?? DELETE
+async function deleteItem(id) {
+  try {
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/room/delete");
+    await restAPI.delete(id, token);
+    console.log("Item delete");
+  } catch (error) {
+    console.error("Failed to delete item: " + error);
+  }
+}
