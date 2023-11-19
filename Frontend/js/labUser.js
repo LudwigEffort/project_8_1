@@ -139,3 +139,33 @@ function generateTable(data) {
     tableBody.innerHTML += row;
   });
 }
+
+//?? POST
+const createForm = document.getElementById("createForm");
+const createItemButton = document.getElementById("addBtn");
+
+createForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const itemData = {
+      id: parseInt(0, 10),
+      firstName: document.getElementById("createFirstName").value,
+      lastName: document.getElementById("createLastName").value,
+      emailAddress: document.getElementById("createEmail").value,
+      phoneNumber: document.getElementById("createPhone").value,
+      role: document.getElementById("createRole").value,
+      token: document.getElementById("createToken").value,
+    };
+    const restAPI = new RestAPI(
+      "http://localhost:5005/LabManager/labUser/create"
+    );
+    const result = await restAPI.create(itemData, token);
+    console.log(result);
+  } catch (error) {
+    console.error("Failed to create data: " + error);
+  }
+});
+
+createItemButton.addEventListener("click", () => {
+  document.getElementById("createContainer").style.display = "block";
+});

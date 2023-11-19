@@ -92,7 +92,7 @@ namespace LabWebAPI.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("Successfully created");
+            return Ok(new { labUserMap.Id, Message = "Successfully created" });
         }
 
         //* PUT Method
