@@ -27,7 +27,7 @@ namespace LabWebAPI.Controllers
         //* GET Methods
         //TODO: add auth for user client
         [HttpGet("all")]
-        [ProducesResponseType(200, Type = typeof(Item))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Item>))]
         public IActionResult GetItems()
         {
             //? Auth

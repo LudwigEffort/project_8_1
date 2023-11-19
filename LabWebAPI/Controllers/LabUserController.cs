@@ -24,7 +24,7 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<LabUser>))]
         public IActionResult GetLabUsers()
         {
-            var users = _mapper.Map<List<LabUser>>(_labUserRepository.GetLabUsers());
+            var users = _mapper.Map<List<LabUserDto>>(_labUserRepository.GetLabUsers());
 
             if (!ModelState.IsValid)
             {

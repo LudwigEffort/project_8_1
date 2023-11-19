@@ -8,6 +8,6 @@ namespace LabWebAPI.Dto
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string Role { get; set; } = "client";
-        public string Token { get; set; }
+        // public string Token { get; set; }
     }
 }
