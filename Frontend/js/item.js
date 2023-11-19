@@ -80,6 +80,27 @@ class RestAPI {
       console.log("Failed to PUT: " + error);
     }
   }
+  //? DELETE
+  async delete(id, token) {
+    try {
+      const response = await fetch(`${this.baseURL}/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP error, state: " + response.status);
+      }
+      if (response.status === 204) {
+        console.log("Delete data successful");
+      }
+      // return await response.json();
+    } catch (error) {
+      console.error("Failed to DELETE: " + error);
+    }
+  }
 }
 
 //* DOM scripts
@@ -234,4 +255,15 @@ function editItem(id) {
   loadItemById(id, token).then(() => {
     document.getElementById("editContainer").style.display = "block";
   });
+}
+
+//?? DELETE
+async function deleteItem(id) {
+  try {
+    const restAPI = new RestAPI("http://localhost:5005/LabManager/item/delete");
+    await restAPI.delete(id, token);
+    alert("Item delited");
+  } catch (error) {
+    console.error("Failed to delete item: " + error);
+  }
 }
