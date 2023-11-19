@@ -9,7 +9,7 @@ namespace LabWebAPI.Dto
         public string TechSpec { get; set; } = "empty";
         public string ItemIdentifier { get; set; }
         public string Status { get; set; } = "available";
-        public DateTime CreationDate { get; set; }
+        //public DateTime CreationDate { get; set; }
         public int RoomId { get; set; }
         public List<SoftwareDto> Softwares { get; set; }
     }

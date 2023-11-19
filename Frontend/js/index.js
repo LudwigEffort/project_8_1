@@ -42,12 +42,6 @@ class RestAPI {
     try {
       let url = new URL(`${this.baseURL}/edit/${id}`);
 
-      // if (queryId) {
-      //   let params = new URLSearchParams();
-      //   params.append("softwareId", queryId);
-      //   url.search = params;
-      // }
-
       console.log("URL:", url.toString());
 
       const response = await fetch(url, {
@@ -129,6 +123,9 @@ async function loadItemById(id, token) {
     document.getElementById("editTechSpec").value = data.techSpec;
     document.getElementById("editStatus").value = data.status;
     document.getElementById("editRoomId").value = data.roomId;
+    document.getElementById("editSoftwares").value = data.softwares
+      .map((s) => s.id)
+      .join(", ");
   } catch (error) {
     console.error("Failed to load data: " + error);
   }
@@ -139,21 +136,33 @@ const updateForm = document.getElementById("editForm");
 updateForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const itemId = document.getElementById("editId").value;
+
+  const softwareIds = document
+    .getElementById("editSoftwares")
+    .value.split(",")
+    .map((idStr) => idStr.trim())
+    .filter((idStr) => idStr.length > 0)
+    .map((trimmedIdStr) => parseInt(trimmedIdStr));
+
+  const softwareData = softwareIds.map((id) => {
+    return { id, softwareName: "string" };
+  });
+
   const itemData = {
-    id: itemId,
+    id: parseInt(itemId, 10),
     itemName: document.getElementById("editName").value,
     itemType: document.getElementById("editType").value,
     description: document.getElementById("editDescription").value,
     techSpec: document.getElementById("editTechSpec").value,
     status: document.getElementById("editStatus").value,
-    roomId: document.getElementById("editRoomId").value,
+    roomId: parseInt(document.getElementById("editRoomId").value, 10),
+    softwares: softwareData,
   };
-  let softwareId = document.getElementById("editSoftwareId").value;
 
   try {
     const restAPI = new RestAPI("http://localhost:5005/LabManager/item");
     const response = await restAPI.update(itemId, itemData, token);
-    if (response) {
+    if (response.ok) {
       alert("Item updated successfully!");
     } else {
       alert("Error updating item");

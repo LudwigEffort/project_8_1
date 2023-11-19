@@ -60,17 +60,17 @@ namespace LabWebAPI.Controllers
         public IActionResult GetItemById(int itemId)
         {
             //? Auth
-            if (!HttpContext.Items.ContainsKey("User"))
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (!HttpContext.Items.ContainsKey("User"))
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
-            var user = HttpContext.Items["User"] as LabUser;
+            // var user = HttpContext.Items["User"] as LabUser;
 
-            if (user == null || user.Role != "admin")
-            {
-                return Unauthorized("Not authorized!");
-            }
+            // if (user == null || user.Role != "admin")
+            // {
+            //     return Unauthorized("Not authorized!");
+            // }
 
             //? Item
             if (!_itemRepository.ItemExists(itemId))
