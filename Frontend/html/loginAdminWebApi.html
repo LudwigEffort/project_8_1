@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <!-- My CSS -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <!-- Remove favicon 404 error -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
     <!-- Bootstrap Script -->
@@ -22,7 +22,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- My Script -->
-    <script src="../js/software.js" defer></script>
+    <script src="js/index.js" defer></script>
   </head>
   <body>
     <header>
@@ -33,17 +33,17 @@
             >Laboratory Manager</a
           >
           <div class="navbar-nav me-auto">
-            <a class="nav-link fg0" href="item.html">Item</a>
-            <a class="nav-link fg0" href="labUser.html">LabUser</a>
-            <a class="nav-link fg0" href="reservation.html">Reservation</a>
-            <a class="nav-link fg0" href="room.html">Room</a>
-            <a class="nav-link fg0" href="software.html">Software</a>
+            <a class="nav-link fg0" href="html/item.html">Item</a>
+            <a class="nav-link fg0" href="html/labUser.html">LabUser</a>
+            <a class="nav-link fg0" href="html/reservation.html">Reservation</a>
+            <a class="nav-link fg0" href="html/room.html">Room</a>
+            <a class="nav-link fg0" href="html/software.html">Software</a>
             <a class="nav-link fg0" href="loginAdminWebApi.html"
               >Login Manager</a
             >
           </div>
           <div class="navbar-nav ms-auto">
-            <a class="btn btn-primary me-2" id="loginBtn" href="login.html"
+            <a class="btn btn-primary me-2" id="loginBtn" href="html/login.html"
               >Login</a
             >
             <a
@@ -57,51 +57,65 @@
       </nav>
     </header>
     <main>
-      <!-- Softwares Container -->
+      <!-- Items Container -->
       <div class="container dev_fg">
         <div class="row align-items-center my_bg_1">
           <div class="col">
-            <h1>Softwares</h1>
+            <h1>Make Reservation</h1>
           </div>
           <div class="col-auto">
             <a id="addBtn" class="btn btn-primary me-2" href="#"
-              >Add Software</a
+              >Create Reservation</a
             >
-            <a id="getBtn" class="btn btn-primary" href="#">Gets Softwares</a>
+            <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
           </div>
         </div>
-        <!-- GET Rooms Div -->
+        <!-- GET Items Div -->
         <div class="content mt-5">
           <table class="table">
             <thead class="thead-dark">
               <tr>
                 <th>ID</th>
-                <th>Software Name</th>
-                <th>Edit</th>
-                <th>Delite</th>
+                <th>Nome Articolo</th>
+                <th>Tipo</th>
+                <th>Descrizione</th>
+                <th>Spec. Tecniche</th>
+                <th>ID Articolo</th>
+                <th>Stato</th>
+                <th>Data Creazione</th>
+                <th>ID Stanza</th>
+                <th>Software</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>
           </table>
         </div>
 
-        <!-- Form Create Software -->
+        <!-- Form Create Reservation -->
         <div id="createContainer" class="mt-4" style="display: none">
-          <h3>Create Software</h3>
+          <h3>Create Reservation</h3>
           <div class="card card-body">
             <form id="createForm">
-              <!-- Id -->
-              <input type="hidden" id="createId" />
-
-              <!-- Software Name -->
+              <!-- Start Time -->
               <div class="mb-3">
-                <label for="createName" class="form-label">Software Name</label>
+                <label for="startTime" class="form-label">Start Time</label>
                 <input
-                  type="text"
+                  type="datetime-local"
                   class="form-control"
-                  id="createName"
-                  placeholder="Software Name"
+                  id="startTime"
                 />
+              </div>
+
+              <!-- Item ID -->
+              <div class="mb-3">
+                <label for="itemId" class="form-label">Item ID</label>
+                <input type="number" class="form-control" id="itemId" />
+              </div>
+
+              <!-- Lab User ID -->
+              <div class="mb-3">
+                <label for="labUserId" class="form-label">Lab User ID</label>
+                <input type="number" class="form-control" id="labUserId" />
               </div>
 
               <!-- Btns -->
@@ -110,36 +124,6 @@
                   Cancel
                 </button>
                 <button type="submit" class="btn btn-primary">Create</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Form Edit Software -->
-        <div id="editContainer" class="mt-4" style="display: none">
-          <h3>Edit Item</h3>
-          <div class="card card-body">
-            <form id="editForm">
-              <!-- Id Software -->
-              <input type="hidden" id="editId" />
-
-              <!-- Software Name -->
-              <div class="mb-3">
-                <label for="editName" class="form-label">Room Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editName"
-                  placeholder="Software Name"
-                />
-              </div>
-
-              <!-- Btns -->
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary me-2">
-                  Cancel
-                </button>
-                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
           </div>

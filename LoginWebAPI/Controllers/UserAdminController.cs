@@ -58,7 +58,7 @@ namespace LoginWebAPI.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromForm] UserAdminPostDto createUser)
+        public IActionResult CreateUser([FromBody] UserAdminPostDto createUser)
         {
             if (createUser == null)
             {
