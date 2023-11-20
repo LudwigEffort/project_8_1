@@ -57,29 +57,6 @@ class RestAPI {
       console.log("Failed to POST: " + error);
     }
   }
-  //? PUT
-  async update(id, putJson, token) {
-    try {
-      const response = await fetch(`${this.baseURL}/edit/${id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify(putJson),
-      });
-
-      if (!response.ok) {
-        throw new Error("HTTP error, state: " + response.status);
-      }
-
-      if (response.status === 204) {
-        console.log("Update data successful");
-      }
-    } catch (error) {
-      console.log("Failed to PUT: " + error);
-    }
-  }
   //? DELETE
   async delete(id, token) {
     try {
@@ -105,3 +82,37 @@ class RestAPI {
 
 //* DOM scripts
 const token = localStorage.getItem("authToken");
+
+//?? GET
+const labAPI = new RestAPI("http://localhost:5005/LabManager/reservation/all");
+const getBtn = document.getElementById("getBtn");
+
+getBtn.addEventListener("click", async () => {
+  try {
+    const result = await labAPI.get(token);
+    console.log(token);
+    generateTable(result);
+  } catch (error) {
+    console.error("Failed to GET request: " + error);
+    console.log(token);
+  }
+});
+
+function generateTable(data) {
+  var tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+
+  data.forEach(function (reservation) {
+    var row = `<tr>
+        <td>${reservation.id}</td>
+        <td>${reservation.startTime}</td>
+        <td>${reservation.endTime}</td>
+        <td>${reservation.reservationStatus}</td>
+        <td>${reservation.item.itemName}</td>
+        <td>${reservation.labUser.firstName}</td>
+        <td>${reservation.labUser.lastName}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteItem(${reservation.id})">Delete</button></td>
+    </tr>`;
+    tableBody.innerHTML += row;
+  });
+}

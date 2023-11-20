@@ -58,13 +58,12 @@
       <div class="container dev_fg">
         <div class="row align-items-center my_bg_1">
           <div class="col">
-            <h1>Lab Users</h1>
+            <h1>Reservations</h1>
           </div>
           <div class="col-auto">
-            <a id="addBtn" class="btn btn-primary me-2" href="#"
-              >Add Lab User</a
+            <a id="getBtn" class="btn btn-primary" href="#"
+              >Gets Reservations</a
             >
-            <a id="getBtn" class="btn btn-primary" href="#">Gets Lab Users</a>
           </div>
         </div>
         <!-- GET Rooms Div -->
@@ -73,20 +72,20 @@
             <thead class="thead-dark">
               <tr>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Edit</th>
-                <th>Delite</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Status</th>
+                <th>Item Name</th>
+                <th>User First Name</th>
+                <th>User Last Name</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>
           </table>
         </div>
 
-        <!-- Form Create Lab User -->
+        <!-- Form Create Reservation -->
         <div id="createContainer" class="mt-4" style="display: none">
           <h3>Create Lab User</h3>
           <div class="card card-body">
@@ -94,176 +93,12 @@
               <!-- Id -->
               <input type="hidden" id="createId" />
 
-              <!-- First Name -->
-              <div class="mb-3">
-                <label for="createFirstName" class="form-label"
-                  >First Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createFirstName"
-                  placeholder="First Name"
-                />
-              </div>
-
-              <!-- Last Name -->
-              <div class="mb-3">
-                <label for="createLastName" class="form-label">Last Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createLastName"
-                  placeholder="Last Name"
-                />
-              </div>
-
-              <!--  Email -->
-              <div class="mb-3">
-                <label for="createEmail" class="form-label">Email</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createEmail"
-                  placeholder="Email"
-                />
-              </div>
-
-              <!-- Phone -->
-              <div class="mb-3">
-                <label for="createPhone" class="form-label">Phone</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createPhone"
-                  placeholder="Phone"
-                />
-              </div>
-
-              <!-- Role -->
-              <div class="mb-3">
-                <label for="createRole" class="form-label">Role</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createRole"
-                  placeholder="Role"
-                />
-              </div>
-
-              <!-- Role -->
-              <div class="mb-3">
-                <label for="createToken" class="form-label">Token</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="createToken"
-                  placeholder="Token"
-                />
-              </div>
-
-              <!-- Token-->
-              <div class="mb-3">
-                <label for="editToken" class="form-label">Token</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editToken"
-                  placeholder="Token"
-                />
-              </div>
-
               <!-- Btns -->
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-secondary me-2">
                   Cancel
                 </button>
                 <button type="submit" class="btn btn-primary">Create</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Form Edit Lab User -->
-        <div id="editContainer" class="mt-4" style="display: none">
-          <h3>Edit Lab User</h3>
-          <div class="card card-body">
-            <form id="editForm">
-              <!-- Id Software -->
-              <input type="hidden" id="editId" />
-
-              <!-- First Name -->
-              <div class="mb-3">
-                <label for="editFirstName" class="form-label">First Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editFirstName"
-                  placeholder="First Name"
-                />
-              </div>
-
-              <!-- Last Name -->
-              <div class="mb-3">
-                <label for="editLastName" class="form-label">Last Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editLastName"
-                  placeholder="Last Name"
-                />
-              </div>
-
-              <!--  Email -->
-              <div class="mb-3">
-                <label for="editEmail" class="form-label">Email</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editEmail"
-                  placeholder="Email"
-                />
-              </div>
-
-              <!-- Phone -->
-              <div class="mb-3">
-                <label for="editPhone" class="form-label">Phone</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editPhone"
-                  placeholder="Phone"
-                />
-              </div>
-
-              <!-- Role -->
-              <div class="mb-3">
-                <label for="editRole" class="form-label">Role</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editRole"
-                  placeholder="Role"
-                />
-              </div>
-
-              <!-- Token-->
-              <div class="mb-3">
-                <label for="editToken" class="form-label">Token</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editToken"
-                  placeholder="Token"
-                />
-              </div>
-
-              <!-- Btns -->
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary me-2">
-                  Cancel
-                </button>
-                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
           </div>
