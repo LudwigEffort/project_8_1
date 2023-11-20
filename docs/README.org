@@ -138,15 +138,17 @@ Ho inserito nel Login Web API un metodo che mi genera un token, che poi il mio L
 Le sovraposizioni le gestisco tramite una query linq, non ho ancora implentato gli slot di tempo.
 *** TODO Frontend
 + [-] Login page
-  + [-] Login form
+  + [X] Login form
   + [ ] Log out (clear local storage)
-+ [-] SignUp page
++ [X] SignUp page
++ [ ] Admin Login page
 + [-] Lab page
+  + [ ] Index CRUD
   + [X] Item CRUD
-  + [ ] LabUser CRUD
-  + [ ] Reservation CRUD
+  + [X] LabUser CRUD
+  + [-] Reservation CRUD
   + [X] Room CRUD
-  + [-] Software CRUD
+  + [X] Software CRUD
 *** Tests
 *** Not Implement
 + Tests

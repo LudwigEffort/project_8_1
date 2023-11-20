@@ -73,7 +73,7 @@ namespace LabWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            DateTime startTime = DateTime.Now;
+            DateTime startTime = createReservation.StartTime;
             DateTime endTime = startTime.AddHours(2);
 
             if (!_reservationRepository.IsReservationAvailable(createReservation.ItemId, startTime, endTime))
