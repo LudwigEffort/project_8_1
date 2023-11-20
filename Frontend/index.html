@@ -59,7 +59,9 @@
             <h1>Make Reservation</h1>
           </div>
           <div class="col-auto">
-            <!-- <a class="btn btn-primary me-2" href="#">Create Reservation</a> -->
+            <a id="addBtn" class="btn btn-primary me-2" href="#"
+              >Create Reservation</a
+            >
             <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
           </div>
         </div>
@@ -78,11 +80,53 @@
                 <th>Data Creazione</th>
                 <th>ID Stanza</th>
                 <th>Software</th>
-                <th>Book</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>
           </table>
+        </div>
+
+        <!-- Form Create Reservation -->
+        <div id="createContainer" class="mt-4" style="display: none">
+          <h3>Create Reservation</h3>
+          <div class="card card-body">
+            <form id="createForm">
+              <!-- Start Time -->
+              <div class="mb-3">
+                <label for="startTime" class="form-label">Start Time</label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  id="startTime"
+                />
+              </div>
+
+              <!-- Item ID -->
+              <div class="mb-3">
+                <label for="itemId" class="form-label">Item ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="itemId"
+                  readonly
+                />
+              </div>
+
+              <!-- Lab User ID -->
+              <div class="mb-3">
+                <label for="labUserId" class="form-label">Lab User ID</label>
+                <input type="number" class="form-control" id="labUserId" />
+              </div>
+
+              <!-- Btns -->
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">Create</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </main>

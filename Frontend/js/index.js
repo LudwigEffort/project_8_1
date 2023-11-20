@@ -96,10 +96,33 @@ function generateTable(data) {
           item.softwares.map((software) => software.softwareName).join(", ") ||
           "Nessun Software"
         }</td>
-        <td><button class="btn btn-primary btn-sm" onclick="editItem(${
-          item.id
-        })">Book</button></td>
     </tr>`;
     tableBody.innerHTML += row;
   });
 }
+
+//?? POST
+const createForm = document.getElementById("createForm");
+const createItemButton = document.getElementById("addBtn");
+
+createForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const reservationData = {
+      startTime: document.getElementById("startTime").value,
+      itemId: parseInt(document.getElementById("itemId").value),
+      labUserId: parseInt(document.getElementById("labUserId").value),
+    };
+    const restAPI = new RestAPI(
+      "http://localhost:5005/LabManager/reservation/create"
+    );
+    const result = await restAPI.create(reservationData, token);
+    console.log(result);
+  } catch (error) {
+    console.error("Failed to create reservation: ", error);
+  }
+});
+
+createItemButton.addEventListener("click", () => {
+  document.getElementById("createContainer").style.display = "block";
+});
