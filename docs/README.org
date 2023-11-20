@@ -18,6 +18,10 @@ So we have:
 + *Login Web API*, this microservice is responsible to manage SignUp and SignIn of users.
   This API, when user is logged in, authorized the operations in Lab Manager with a token.
 + *Lab Manager Web API*, this microservice is main application, it's responsible to manage a Lab Computer Science.
+The two microservices communicate with each other via the frontend with token, in this way:
+1. The *Login Web API* when a user is logged return a token.
+2. The *Login Frontend* save this token in local storage.
+3. The *Lab Web API* authenticate sigle HTTP methods with token retrieved from local storage with Lab Frontend.
 ** UML
 This is the *UML* of project:
 #+caption: Project 8.1 UML
