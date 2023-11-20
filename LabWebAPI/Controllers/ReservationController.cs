@@ -32,7 +32,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Reservation>))]
         public IActionResult GetReservations()
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
 
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Reservation get all method
             var reservations = _mapper.Map<List<ReservationDto>>(_reservationRepository.GetReservations());
 
             if (!ModelState.IsValid)
@@ -47,6 +60,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(200, Type = typeof(Reservation))]
         public IActionResult GetRservationById(int reservationId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Reservation get by id method
             if (!_reservationRepository.ReservationExists(reservationId))
             {
                 return NotFound();
@@ -68,6 +95,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateReservation([FromBody] ReservationPostDto createReservation)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Reservation post method
             if (createReservation == null)
             {
                 return BadRequest(ModelState);
@@ -109,6 +150,20 @@ namespace LabWebAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult DeleteReservationByUser(int reservationId)
         {
+            //? Auth
+            if (!HttpContext.Items.ContainsKey("User"))
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            var user = HttpContext.Items["User"] as LabUser;
+
+            if (user == null || user.Role != "admin")
+            {
+                return Unauthorized("Not authorized!");
+            }
+
+            //? Reservation delete method
             if (!_reservationRepository.ReservationExists(reservationId))
             {
                 return NotFound();
