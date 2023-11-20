@@ -9,6 +9,7 @@
 :unnumbered: t
 :end:
 + Date: [2023-11-07]
+My github for commit history: [[https://github.com/LudwigEffort/project_8_1][Project8.1]]
 * Developing Summary
 ** Design
 I decided to develop the project with Code First approach, so I created before the models of my application and after with Entiry Framework I generate the databases.
