@@ -49,10 +49,23 @@ This is the *UML* of project:
 * Start the Project
 To start the project, start the servers in this order:
 1. *Login Web API*
+   + Move in *LoginWebAPI*
+   + Run ~dotnet restore~ to install dependency.
+   + Run server with ~dotnet watch~ in terminal
 2. *Lab Web API*
+   + Move in *LabWebAPI*
+   + Run ~dotnet restore~ to install dependency.
+   + Run server with ~dotnet watch~ in terminal
 3. *Frontend*
+   + Install dependency with ~npn install~
+   + Run server with ~npm start~
 #+begin_quote
-NOTE:
+NOTE: If acces to the databases doesn't work, redo the Migrations and Seeding for each Web API, like this:
+1. Remove *Migrations* folder
+2. Remove SQLite database from *db* folder
+3. Run ~dotnet ef migrations add FirstCreate~ in terminal
+4. Run ~dotnet ef database update~ in terminal
+5. Run ~dotnet run -- seeddata~ in terminal
 #+end_quote
 * Not Impemented
 + Test
