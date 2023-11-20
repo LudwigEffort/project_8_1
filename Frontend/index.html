@@ -59,12 +59,31 @@
             <h1>Make Reservation</h1>
           </div>
           <div class="col-auto">
-            <a class="btn btn-primary me-2" href="#">Create Reservation</a>
+            <!-- <a class="btn btn-primary me-2" href="#">Create Reservation</a> -->
             <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
           </div>
         </div>
         <!-- GET Items Div -->
-        <div class="content mt-5"></div>
+        <div class="content mt-5">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nome Articolo</th>
+                <th>Tipo</th>
+                <th>Descrizione</th>
+                <th>Spec. Tecniche</th>
+                <th>ID Articolo</th>
+                <th>Stato</th>
+                <th>Data Creazione</th>
+                <th>ID Stanza</th>
+                <th>Software</th>
+                <th>Book</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
       </div>
     </main>
   </body>
