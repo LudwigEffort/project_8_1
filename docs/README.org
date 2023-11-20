@@ -9,150 +9,51 @@
 :unnumbered: t
 :end:
 + Date: [2023-11-07]
-* Project 8.1
-Per questo progetto ho decisio di trattare le due applicazioni come due microservizi indipendenti, con dei database *SQLite* dedicati.
-Quindi avremo due Web API:
-+ *Login Web API*, è quell'API che si occupa di gestire i *sign up* e *login* degli utenti, avrá un *admin* che gestisce la lista degli utenti registrati.
-+ *Lab Manager Web API*. è l'API che si occupa di gestire il laboratorio, anche qui avremo un admin che gestisce le risorse dell'API.
-Le due API dovranno comunicare tra di loro, il *Login Web API* deve registrare l'user dentro *Lab Manager Web API* se l'user non è gia nel db del laboratorio, il *Login* deve autenticare l'accesso al *Lab* e di conseguenza sbloccare le operazioni degli user loggati.
-Entrambi le *API* sono state sviluppate con un approccio *Code First*, in ottica di integrazione con i database tramite l'entity framework.
-Qundi per ogni API ho definito i *Model* con le loro relazioni, cosí poi l'*Entity Framework* si occupa di generare il db, con tutte le relazioni tra le tabelle.
-Sto utilizzando il *Repository pattern* per nascondere il codice che si occupa di accedere ai dati del db, in questo modo se in futuro voglio cambiare il meccanismo di persistenza dei dati, per esempio utilizzando un file manager, posso farlo senza troppi problemi.
+* Developing Summary
+** Design
+I decided to develop the project with Code First approach, so I created before the models of my application and after with Entiry Framework I generate the databases.
+This way I focused on developing the Web APIs without having too many problems with data persistence.
+I developed the Project how two independent microservices, with dedicated SQLite databases.
+So we have:
++ *Login Web API*, this microservice is responsible to manage SignUp and SignIn of users.
+  This API, when user is logged in, authorized the operations in Lab Manager with a token.
++ *Lab Manager Web API*, this microservice is main application, it's responsible to manage a Lab Computer Science.
 ** UML
-Ecco l'*UML* del progetto:
+This is the *UML* of project:
 #+caption: Project 8.1 UML
 #+name: fig. 1
 #+ATTR_ORG: :width 400
 [[../docs/img/project_8_1_uml.png]]
-** Developing
-*** Ordine Sviluppo Web API
-1. Creazione Model, DbContext e relazioni
-2. Creazione Seed
-3. Prima Migration e Seeding
-4. Repository Pattern
-   + CRUD
-5. Dto & AutoMapper
-6. Controller
-   + HTTP Methods
-*** Login Web API
-Con la separazione dei controller, repository pattern e dei dto, possiamo svilluppare la nostra API con differenti regole di accesso, qundi i nostri *User* possono avere differenti ruoli. Nel nostro caso solo due: *client* e *admin*.
-**** User Model & Db
-+ Nel model degli *User* ho utilizzato le *DataAnotation* per dare delle specifiche alle colonne del mio database (come campi obbligatori, regex, ecc).
-+ Per il campo *email* ho voluto renderlo unico (quindi non è possibile creare utenti con la stessa email) grazie alla configurazione del *DbContext* tramite il *Fluent API*.
-+ Ho creato uno script chiamato *Seed* per popolare il db del login.
-**** Controller
-Per gestire le autorizzazioni, sto differenziando i ruoli di client e admin su due controller diversi. Quindi avremo due controller:
-+ *UserAdminController*
-+ *UserClientController*
-***** LoginClientService
-Il controller *LoginClientService* ha le seguenti funzioni:
-+ *Sign up*, l'user si puó registrare nel db dell'API.
-+ *Login*, l'user effetua il login e il controller invia il token di autenticazione.
-***** UserAdminController
-In questo controller abbiamo le operazioni che puó effetuare l'admin.
-Per il momento ho decisio di non inserire nessun login, successivamente bisogna inserire un login per la parte di admin (quindi eliminare la possibilitá da parte del client di registrarsi come admin).
-**** Repository Pattern
-Ho deciso di separare i *Repository Pattern* per ogno ruolo degli user.
-**** Dto & AutoMapper
-Ho deciso di separare i *Dto* per ogno ruolo degli user.
-*** Lab Manager Web API
-Per il *Lab Manager* ho pensato che la registrazine degli user nel db avviene tramite l'*Admin*, manualmente con un form.
-Il *client* si identifica con un *token* per sbloccare il controller delle prenotazioni.
-** Tasks List
-*** General
-+ [-] Progettazione
-  - [X] Progettazione App
-  - [-] Creazione UML by Code First
-  - [X] Validazioni campi database? -> fatto cone le data anotations
-+ [-] Requirements
-  - [-] User registration and authentication
-  - [-] User Admin
-  - [-] Lab management
-  - [ ] User access
-  - [X] Persistence
-  - [ ] User Interface (Frontend)
-  - [ ] Tests
-*** DONE Login
-CLOSED: [2023-11-16 Thu 12:08]
-+ [X] Creazione Model, DbContext e relazioni
-+ [X] Creazione Seed
-+ [X] Prima Migration e Seeding
-+ [X] Repository Pattern & CRUD
-  + [X] Admin
-    - [X] Read
-    - [X] Create
-    - [X] Update
-    - [X] Delete
-  + [X] Client
-    - [X] Read
-    - [X] Create
-+ [X] Dto & AutoMapper
-+ [X] Controller & HTTP Methods
-  + [X] Admin Controller
-    - [X] GET
-    - [X] POST
-    - [X] PUT
-    - [X] DELETE
-+ [X] Client Controller
-    - [X] POST (Sign up)
-    - [X] POST (Login)
-*** DONE Lab
-CLOSED: [2023-11-16 Thu 12:08]
-+ [X] Creazione Model, DbContext e relazioni
-+ [X] Creazione Seed
-+ [X] Prima Migration e Seeding
-+ [X] Repository Pattern & CRUD
-  - [X] Read
-  - [X] Create
-  - [X] Update
-  - [X] Delete
-+ [X] Dto & AutoMapper
-+ [X] Controller & HTTP Methods
-  - [X] GET
-  - [X] POST
-  - [X] PUT
-  - [X] DELETE
-**** DONE List of Lab CRUD
-CLOSED: [2023-11-16 Thu 12:08]
-+ Admin
-  + [X] Item (refactor)
-  + [X] Lab User
-  + [X] Software
-  + [X] Room
-  + [X] Reservation (Only Reading)
-+ Client
-  + [X] Item (Only Reading)
-  + [X] Reservation
-*** TODO To Implement
-+ [ ] GET Item by software
-+ [ ] GET Item by type
-+ [ ] GET Item by room
-+ [ ] GET Item by status (available)
-+ [ ] Booking by Time Slot
-+ [X] Auth by token in Lab Methods
-+ [X] Add communication between api
-*** Comunizazione tra API
-Ho inserito nel Login Web API un metodo che mi genera un token, che poi il mio Lab Manager Web API utilizza per autenticare le CRUD del laboratorio.
-*** Autorizzazioni
-*** Sovrapposizioni Reservations
-Le sovraposizioni le gestisco tramite una query linq, non ho ancora implentato gli slot di tempo.
-*** TODO Frontend
-+ [-] Login page
-  + [X] Login form
-  + [ ] Log out (clear local storage)
-+ [X] SignUp page
-+ [ ] Admin Login page
-+ [-] Lab page
-  + [ ] Index CRUD
-  + [X] Item CRUD
-  + [X] LabUser CRUD
-  + [-] Reservation CRUD
-  + [X] Room CRUD
-  + [X] Software CRUD
-*** Tests
-*** Not Implement
-+ Tests
+** Development order
+1. Developing *Login Web API*
+   1. *Model* Creation
+   2. Migration and Seeding by Entiry Framework
+   3. *Controller* and *CRUD*
+   4. Test with Swagger
+2. Developing *Lab Web API*
+   1. *Model* Creation
+   2. Definition of table realtionships
+   3. Migration and Seeding by Entiry Framework
+   4. *Controllers* and *CRUD*
+   5. Test with Swagger
+3. Add password with Nuance in *Login Web API*
+4. Frontend
+   1. Login and SignUp View
+   2. Lab Admin CRUD Viewes
+   3. Lab Client CRUD View
+5. Auth by token for *Lab Web API CURD*
+* Start the Project
+To start the project, start the servers in this order:
+1. *Login Web API*
+2. *Lab Web API*
+3. *Frontend*
+#+begin_quote
+NOTE:
+#+end_quote
+* Not Impemented
++ Test
 + Token expires
-+ Booking by Time slot
++ Booking by time slots (my Lab Web API booking by date form)
++ Logout (clean local storage)
++ Login Web API Frontend View (the frontend not work)
 + When I booking an item, I Have to change item status. Status come back available when the reservation expires.
-+
