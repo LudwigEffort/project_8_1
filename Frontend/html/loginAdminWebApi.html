@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <!-- My CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <!-- Remove favicon 404 error -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
     <!-- Bootstrap Script -->
@@ -22,7 +22,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- My Script -->
-    <script src="js/index.js" defer></script>
+    <script src="../js/loginAdminWebApi.js" defer></script>
   </head>
   <body>
     <header>
@@ -61,61 +61,107 @@
       <div class="container dev_fg">
         <div class="row align-items-center my_bg_1">
           <div class="col">
-            <h1>Make Reservation</h1>
+            <h1>User Manager</h1>
           </div>
           <div class="col-auto">
-            <a id="addBtn" class="btn btn-primary me-2" href="#"
-              >Create Reservation</a
-            >
-            <a id="getBtn" class="btn btn-primary" href="#">Gets Items</a>
+            <!-- <a id="addBtn" class="btn btn-primary me-2" href="#">Add User</a> -->
+            <a id="getBtn" class="btn btn-primary" href="#">Gets Users</a>
           </div>
         </div>
-        <!-- GET Items Div -->
+        <!-- GET User Div -->
         <div class="content mt-5">
           <table class="table">
             <thead class="thead-dark">
               <tr>
                 <th>ID</th>
-                <th>Nome Articolo</th>
-                <th>Tipo</th>
-                <th>Descrizione</th>
-                <th>Spec. Tecniche</th>
-                <th>ID Articolo</th>
-                <th>Stato</th>
-                <th>Data Creazione</th>
-                <th>ID Stanza</th>
-                <th>Software</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Ban</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>
           </table>
         </div>
 
-        <!-- Form Create Reservation -->
-        <div id="createContainer" class="mt-4" style="display: none">
-          <h3>Create Reservation</h3>
+        <!-- Form Edit User -->
+        <div id="editContainer" class="mt-4" style="display: none">
+          <h3>Edit Item</h3>
           <div class="card card-body">
-            <form id="createForm">
-              <!-- Start Time -->
+            <form id="editForm">
+              <!-- Id -->
+              <input type="hidden" id="editId" />
+
+              <!-- User Email -->
               <div class="mb-3">
-                <label for="startTime" class="form-label">Start Time</label>
+                <label for="editName" class="form-label">Item Name</label>
                 <input
-                  type="datetime-local"
+                  type="text"
                   class="form-control"
-                  id="startTime"
+                  id="editName"
+                  placeholder="Item Name"
                 />
               </div>
 
-              <!-- Item ID -->
+              <!-- User Role -->
               <div class="mb-3">
-                <label for="itemId" class="form-label">Item ID</label>
-                <input type="number" class="form-control" id="itemId" />
+                <label for="editType" class="form-label">Item Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editType"
+                  placeholder="Item Name"
+                />
               </div>
 
-              <!-- Lab User ID -->
+              <!-- User First Name -->
               <div class="mb-3">
-                <label for="labUserId" class="form-label">Lab User ID</label>
-                <input type="number" class="form-control" id="labUserId" />
+                <label for="editTechSpec" class="form-label">Tech Spec</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editTechSpec"
+                  placeholder="Tech Spec"
+                />
+              </div>
+
+              <!-- User Last Name -->
+              <div class="mb-3">
+                <label for="editItemIdentifier" class="form-label"
+                  >Item Identifier</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editItemIdentifier"
+                  placeholder="Item Identifier"
+                />
+              </div>
+
+              <!-- User Phone -->
+              <div class="mb-3">
+                <label for="editStatus" class="form-label">Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editStatus"
+                  placeholder="Status"
+                />
+              </div>
+
+              <!-- User Ban -->
+              <div class="mb-3">
+                <label for="editRoomId" class="form-label">Room ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="editRoomId"
+                  placeholder="Room ID"
+                />
               </div>
 
               <!-- Btns -->
@@ -123,7 +169,7 @@
                 <button type="button" class="btn btn-secondary me-2">
                   Cancel
                 </button>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
           </div>

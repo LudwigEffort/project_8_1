@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LoginWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("LoginManager/admin")]
     public class UserAdminController : Controller
     {
         private readonly IUserAdminRepository _userAdminRepository;
@@ -20,7 +20,7 @@ namespace LoginWebAPI.Controllers
         }
 
         //* GET methods
-        [HttpGet]
+        [HttpGet("user/all")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
         public IActionResult GetUsers()
         {
@@ -34,7 +34,7 @@ namespace LoginWebAPI.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("user/{userId}")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(400)]
         public IActionResult GetUser(int userId)
@@ -55,7 +55,7 @@ namespace LoginWebAPI.Controllers
         }
 
         //* POST method
-        [HttpPost]
+        [HttpPost("user/create")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateUser([FromBody] UserAdminPostDto createUser)
@@ -92,7 +92,7 @@ namespace LoginWebAPI.Controllers
         }
 
         //* PUT method
-        [HttpPut("{userId}")]
+        [HttpPut("user/edit/{userId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -132,7 +132,7 @@ namespace LoginWebAPI.Controllers
         }
 
         //* DELTE method
-        [HttpDelete("{userId}")]
+        [HttpDelete("user/delete/{userId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
