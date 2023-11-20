@@ -1,29 +1,31 @@
 
 # Table of Contents
 
--   [Lecture info](#org1cc5e31)
-1.  [Developing Summary](#org2547c69)
-    1.  [Design](#orgc8f9d4a)
-    2.  [UML](#orgecf8b77)
-    3.  [Development order](#org35ffc5e)
-2.  [Start the Project](#org0dac9ff)
-3.  [Not Impemented](#orgbbaf03c)
+-   [Lecture info](#org5081be8)
+1.  [Developing Summary](#orgf5a5a4d)
+    1.  [Design](#org6c84c58)
+    2.  [UML](#org794ba08)
+    3.  [Development order](#orge9f3d4c)
+2.  [Start the Project](#orgc1b7afe)
+3.  [Not Impemented](#orged06a9e)
 
 
 
-<a id="org1cc5e31"></a>
+<a id="org5081be8"></a>
 
 # Lecture info
 
 -   Date: <span class="timestamp-wrapper"><span class="timestamp">[2023-11-07 Tue]</span></span>
 
+My github for commit history: [Project8.1](https://github.com/LudwigEffort/project_8_1)
 
-<a id="org2547c69"></a>
+
+<a id="orgf5a5a4d"></a>
 
 # Developing Summary
 
 
-<a id="orgc8f9d4a"></a>
+<a id="org6c84c58"></a>
 
 ## Design
 
@@ -43,7 +45,7 @@ The two microservices communicate with each other via the frontend with token, i
 3.  The **Lab Web API** authenticate sigle HTTP methods with token retrieved from local storage with Lab Frontend.
 
 
-<a id="orgecf8b77"></a>
+<a id="org794ba08"></a>
 
 ## UML
 
@@ -52,7 +54,7 @@ This is the **UML** of project:
 ![img](../docs/img/project_8_1_uml.png "Project 8.1 UML")
 
 
-<a id="org35ffc5e"></a>
+<a id="orge9f3d4c"></a>
 
 ## Development order
 
@@ -75,7 +77,7 @@ This is the **UML** of project:
 5.  Auth by token for **Lab Web API CURD**
 
 
-<a id="org0dac9ff"></a>
+<a id="orgc1b7afe"></a>
 
 # Start the Project
 
@@ -102,7 +104,7 @@ To start the project, start the servers in this order:
 > 5.  Run `dotnet run -- seeddata` in terminal
 
 
-<a id="orgbbaf03c"></a>
+<a id="orged06a9e"></a>
 
 # Not Impemented
 
