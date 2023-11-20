@@ -146,3 +146,56 @@ function generateTable(data) {
     tableBody.innerHTML += row;
   });
 }
+
+//?? PUT
+async function loadItemById(id, token) {
+  try {
+    const restAPI = new RestAPI(
+      "http://localhost:5224/LoginManager/admin/user/edit"
+    );
+    const data = await restAPI.getById(id, token);
+    document.getElementById("editId").value = data.id;
+    document.getElementById("editEmail").value = data.emailAddress;
+    document.getElementById("editRole").value = data.role;
+    document.getElementById("editFirstName").value = data.firstName;
+    document.getElementById("editLastName").value = data.lastName;
+    document.getElementById("editPhone").value = data.phoneNumber;
+    document.getElementById("editIsBanned").value = data.isBanned.toString();
+  } catch (error) {
+    console.error("Failed to load data: " + error);
+  }
+}
+
+const updateForm = document.getElementById("editForm");
+
+updateForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    const userId = document.getElementById("editId").value;
+
+    const userData = {
+      id: parseInt(userId, 10),
+      emailAddress: document.getElementById("editEmail").value,
+      role: document.getElementById("editRole").value,
+      firstName: document.getElementById("editFirstName").value,
+      lastName: document.getElementById("editLastName").value,
+      phoneNumber: document.getElementById("editPhone").value,
+      isBanned: document.getElementById("editIsBanned").value === "true",
+    };
+
+    const restAPI = new RestAPI(
+      "http://localhost:5224/LoginManager/admin/user/edit"
+    );
+
+    const result = await restAPI.update(userId, userData, token);
+    console.log(result);
+  } catch (error) {
+    console.error("Failed to update data: " + error);
+  }
+});
+
+function editItem(id) {
+  loadItemById(id, token).then(() => {
+    document.getElementById("editContainer").style.display = "block";
+  });
+}
