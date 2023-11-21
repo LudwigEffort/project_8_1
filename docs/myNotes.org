@@ -137,7 +137,7 @@ CLOSED: [2023-11-20 Mon 10:14]
 * Idee Struttura App
 ** Summury
 Visto che non voglio impazzire con la gestione dei file, ho deciso di creare un applicazione *db first*, visto che so gestire i database (grazie al background). In questo modo posso concentrarmi sullo sviluppo delle singole API. Sto utilizzando il *repository pattern* per l'accesso ai dati del database, cosi posso decidere di cambiare meccanismo di presistenza dei dati.
-** Fist Design App
+** First Design App
 La mia applicazione per la gestione di un laboratorio informatico sará suddivisa in questo modo:
 + *Login API*, per gestire l'autenticazione e l'autorizzazione degli utenti. Questa API sará un servizio da iniettare nell'applicazione principale.
   In questa API abbiamo due tipi di user:
@@ -334,3 +334,240 @@ Ho deciso di separare i *Dto* per ogno ruolo degli user.
 *** Lab Manager Web API
 Per il *Lab Manager* ho pensato che la registrazine degli user nel db avviene tramite l'*Admin*, manualmente con un form.
 Il *client* si identifica con un *token* per sbloccare il controller delle prenotazioni.
+* Charts
+** Nuance (Davide Rodo)
+#+begin_src markdown
+sequenceDiagram
+    participant Frontend
+    participant Backend
+
+    Frontend->>Backend: Richiesta di login (invio email)
+    Backend->>Frontend: Invio della "nuance" basata sull'utente
+    Frontend->>Frontend: Concatenazione della nuance alla password
+    Frontend->>Backend: Invio email e password concatenata
+    Backend->>Backend: Rimozione della nuance e verifica della password
+    alt Password corretta e utente non bloccato/cancellato
+        Backend->>Frontend: Login riuscito, invio di eventuali token o sessione
+    else Password errata o utente bloccato/cancellato
+        Backend->>Frontend: Login fallito (non autorizzato o utente non valido)
+    end
+#+end_src
+** Nuance
+#+begin_src markdown
+sequenceDiagram
+    actor Client as Client
+    participant Controller as LoginClientService
+    participant AuthHelper as AuthHelper
+
+    Client->>Controller: POST /auth/client/signUp (UserClientDto)
+    Controller->>AuthHelper: GenerateNuance(passwordLength)
+    AuthHelper-->>Controller: Nuance
+    Controller->>AuthHelper: ValidatePasswordWithNuance(password, password, nuance)
+    AuthHelper-->>Controller: Validazione risultato
+    Controller-->>Client: Risposta (Successo o Errore)
+
+    Client->>Controller: POST /auth/client/signIn (LoginRequestDto)
+    Controller->>AuthHelper: GenerateNuance(passwordWithNuance.Length)
+    AuthHelper-->>Controller: Nuance
+    Controller->>AuthHelper: ValidatePasswordWithNuance(passwordWithNuance, user.Password, nuance)
+    AuthHelper-->>Controller: Validazione risultato
+    Controller-->>Client: Risposta (Token di accesso o Errore)
+#+end_src
+** Login Web API UML
+#+begin_src markdown
+classDiagram
+    direction LR
+    class LoginWebAPI {
+        +LoginClientService
+        +UserAdminController
+    }
+    class LoginClientService {
+        +signUp(User user)
+        +signIn(): Token
+    }
+    class UserAdminController {
+        +createUser(User user)
+        +readAllUser()
+        +readUser(int id)
+        +updateUser(User user)
+        +deleteUser(User user)
+    }
+    class User {
+        -int Id
+        -string EmailAddress
+        -string Passwrod
+        -string Role
+        -string FirstName
+        -string LastName
+        -string PhoneNumber
+        -bool IsBanned
+        -DateTime CreationTime
+    }
+    class Token {
+    }
+
+    LoginWebAPI --> LoginClientService
+    LoginWebAPI --> UserAdminController
+    LoginClientService --> Token
+    LoginClientService --> User
+    UserAdminController --> User
+#+end_src
+** Lab Manager Web API UML
+*** Controllers
+#+begin_src markdown
+classDiagram
+    direction TB
+    class LabManagerWebAPI {
+        +ItemController
+        +LabUserController
+        +ReservationController
+        +RoomController
+        +SoftwareController
+    }
+    class ItemController {
+        +createItem(Item item)
+        +readAllItems()
+        +readItem(int id)
+        +updateItem(Item item)
+        +deleteItem(Item item)
+    }
+    class LabUserController {
+        +createUser(LabUser user)
+        +readAllUsers()
+        +readUser(int id)
+        +updateUser(LabUser user)
+        +deleteUser(LabUser user)
+    }
+    class ReservationController {
+        +createReservation(Reservation reservation)
+        +readAllReservations()
+        +readReservation(int id)
+        +updateReservation(Reservation reservation)
+        +deleteReservation(Reservation reservation)
+    }
+    class RoomController {
+        +createRoom(Room room)
+        +readAllRooms()
+        +readRoom(int id)
+        +updateRoom(Room room)
+        +deleteRoom(Room room)
+    }
+    class SoftwareController {
+        +createSoftware(Software software)
+        +readAllSoftwares()
+        +readSoftware(int id)
+        +updateSoftware(Software software)
+        +deleteSoftware(Software software)
+    }
+    class Item { }
+    class LabUser { }
+    class Reservation { }
+    class Room { }
+    class Software { }
+
+    LabManagerWebAPI --> ItemController
+    LabManagerWebAPI --> LabUserController
+    LabManagerWebAPI --> ReservationController
+    LabManagerWebAPI --> RoomController
+    LabManagerWebAPI --> SoftwareController
+    ItemController --> Item
+    LabUserController --> LabUser
+    ReservationController --> Reservation
+    RoomController --> Room
+    SoftwareController --> Software
+#+end_src
+*** Models
+#+begin_src markdown
+classDiagram
+    direction LR
+    class Item {
+        -int Id
+        -string ItemName
+        -string ItemType
+        -string Description
+        -string TechSpec
+        -string ItemIdentifier
+        -string Status
+        -DateTime CreationDate
+        -int RoomId
+    }
+    class LabUser {
+        -int Id
+        -string FirstName
+        -string LastName
+        -string EmailAddress
+        -string PhoneNumber
+        -string Role
+        -string Token
+    }
+    class Reservation {
+        -int Id
+        -DateTime StartTime
+        -DateTime EndTime
+        -string ReservationStatus
+        -int ItemId
+        -int LabUserId
+    }
+    class Room {
+        -int Id
+        -string RoomName
+    }
+    class Software {
+        -int Id
+        -string SoftwareName
+    }
+    class ItemSoftware {
+        -int ItemId
+        -int SoftwareId
+    }
+
+    Item "*" -- "1" Room
+    Item "*" -- "*" Software
+    Item "1" -- "*" Reservation
+    Reservation "*" -- "1" LabUser
+#+end_src
+** Project Flow
+#+begin_src markdown
+sequenceDiagram
+    participant Frontend
+    participant LoginAPI as Login Web API
+    participant LabManagerAPI as Lab Manager Web API
+    participant BrowserStorage as Browser Local Storage
+    participant AuthMiddleware as Authentication Middleware
+
+    Frontend->>LoginAPI: Invia richiesta di login (credenziali utente)
+    LoginAPI->>Frontend: Restituisce token se il login è valido
+    Frontend->>BrowserStorage: Salva token nel local storage
+    loop Richieste al Lab Manager Web API
+        Frontend->>LabManagerAPI: Invia richiesta con token (Bearer)
+        LabManagerAPI->>AuthMiddleware: Verifica token
+        alt Se l'autenticazione è valida
+            AuthMiddleware->>LabManagerAPI: Autorizzazione confermata
+            LabManagerAPI->>Frontend: Restituisce risposta (dati/lab operations)
+        else Se l'autenticazione fallisce
+            AuthMiddleware->>LabManagerAPI: Autenticazione fallita
+            LabManagerAPI->>Frontend: Restituisce messaggio di errore
+        end
+    end
+
+#+end_src
+** Project Flow Simplified
+#+begin_src markdown
+sequenceDiagram
+    participant Frontend
+    participant LoginAPI as Login Web API
+    participant LabManagerAPI as Lab Manager Web API
+    participant BrowserStorage as Browser Local Storage
+
+    Frontend->>LoginAPI: Richiede login (credenziali)
+    LoginAPI->>Frontend: Restituisce token se login valido
+    Frontend->>BrowserStorage: Salva token
+    Frontend->>LabManagerAPI: Richiesta con token (Bearer)
+    LabManagerAPI->>Frontend: Risposta (dati o errore autenticazione)
+#+end_src
+* Cosa ho usato
+** Nuance
+** Middleware
+** Automapper & DTO
+** Repository
+** Dependency Injection
