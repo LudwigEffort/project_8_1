@@ -52,8 +52,12 @@ namespace LoginWebAPI.Controllers
             //? generate a nuance from auth helper
             var nuanceSignup = _authHelper.GenerateNuance(createUser.Password.Length);
 
+            var passwordWithNuance = createUser.Password + nuanceSignup;
+
+            bool nuance = _authHelper.ValidatePasswordWithNuance(passwordWithNuance, createUser.Password, nuanceSignup);
+
             //? checks password
-            if (!_authHelper.ValidatePasswordWithNuance(createUser.Password, createUser.Password, nuanceSignup))
+            if (!nuance)
             {
                 return BadRequest("Invalid nuance provided");
             }
