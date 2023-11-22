@@ -565,9 +565,3 @@ sequenceDiagram
     Frontend->>LabManagerAPI: Richiesta con token (Bearer)
     LabManagerAPI->>Frontend: Risposta (dati o errore autenticazione)
 #+end_src
-* Cosa ho usato
-** Nuance
-** Middleware
-** Automapper & DTO
-** Repository
-** Dependency Injection
