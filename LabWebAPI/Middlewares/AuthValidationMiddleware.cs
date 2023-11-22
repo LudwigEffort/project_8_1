@@ -16,29 +16,31 @@ namespace LabWebAPI.Middlewares
         {
             try
             {
-                //? token: ludwig@gmail.com-PJTDO5QE5O
+                //? token type: ludwig@gmail.com-PJTDO5QE5O (Bearer [token])
+                //? exstract token from request header
                 var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ').Last();
                 Console.WriteLine($"Header of Authorization: {token}");
 
                 if (!string.IsNullOrEmpty(token))
                 {
-                    AttachUserToContext(context, labUserRepository, token);
+                    AttachUserToContext(context, labUserRepository, token); //? reacall method
                 }
 
-                await _next(context);
+                await _next(context); //? pass the HTTP request to the next middleware (in this case to controller)
             }
             catch (AuthenticationException authEx)
             {
-                context.Response.StatusCode = 401;
+                context.Response.StatusCode = 401; //? not authorized error
                 await context.Response.WriteAsync(authEx.Message);
             }
             catch (Exception)
             {
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsync("Internal Error");
+                await context.Response.WriteAsync("Internal Error"); //? generic error
             }
         }
 
+        //? verify if user exists and add user to HttpContext.Items
         private void AttachUserToContext(HttpContext context, ILabUserRepository labUserRepository, string token)
         {
             try
@@ -47,11 +49,11 @@ namespace LabWebAPI.Middlewares
 
                 if (!string.IsNullOrEmpty(email))
                 {
-                    var labUser = labUserRepository.GetLabUserByEmail(email);
+                    var labUser = labUserRepository.GetLabUserByEmail(email); //? check user in Lab Manager db
 
                     if (labUser != null)
                     {
-                        context.Items["User"] = labUser;
+                        context.Items["User"] = labUser; //? add user to HttpContext
                     }
                     else
                     {
@@ -65,6 +67,7 @@ namespace LabWebAPI.Middlewares
             }
         }
 
+        //? exstract email from token
         private string ExtractEmailFromToken(string token)
         {
             var chunks = token.Split('-');

@@ -27,7 +27,7 @@ namespace LabWebAPI.Controllers
         //* GET Methods
         //TODO: add auth for user client
         [HttpGet("all")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Item>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Item>))] //? describes the type of response if successful 
         public IActionResult GetItems()
         {
             //? Auth
@@ -46,10 +46,11 @@ namespace LabWebAPI.Controllers
             //? Item get all method
             var items = _mapper.Map<List<ItemDto>>(_itemRepository.GetItems());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest();
+            // }
 
             return Ok(items);
         }
@@ -80,10 +81,11 @@ namespace LabWebAPI.Controllers
 
             var item = _mapper.Map<ItemDto>(_itemRepository.GetItemById(itemId));
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest();
+            // }
 
             return Ok(item);
         }
