@@ -4,17 +4,22 @@ namespace LoginWebAPI.Helper
 {
     public class AuthHelper
     {
+        //* Nuance
+
+        //? generate a nuance from password
         public string GenerateNuance(int passwordLength)
         {
             return (passwordLength * new Random().Next(1, 100)).ToString();
         }
 
+        //? checks password and password with nuance
         public bool ValidatePasswordWithNuance(string pwWithNuance, string originalPassword, string nuance)
         {
             var receivedPassword = pwWithNuance.Replace(nuance, "");
             return receivedPassword == originalPassword;
         }
 
+        //* Token
         public string GenerateToken(string email)
         {
             string randomString = GenerateRandomString(10);

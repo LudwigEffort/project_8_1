@@ -49,13 +49,16 @@ namespace LoginWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            //? generate a nuance from auth helper
             var nuanceSignup = _authHelper.GenerateNuance(createUser.Password.Length);
 
+            //? checks password
             if (!_authHelper.ValidatePasswordWithNuance(createUser.Password, createUser.Password, nuanceSignup))
             {
                 return BadRequest("Invalid nuance provided");
             }
 
+            //? use mapper to convert createUser (Dto) in User model
             var userMap = _mapper.Map<User>(createUser);
 
             userMap.Role = "client";

@@ -81,6 +81,13 @@ L'uso di questa archittetura ha i seguenti vantaggi:
 ** Conclusione
 In conclusione, il middleware svolge un ruolo cruciale nell'autenticare le richieste prima che queste raggiungano il controller. Questa struttura assicura che solo gli utenti autenticati e autorizzati possono accedere alle funzionalitá del controller.
 * DTO & Automapper
+** Mapping Many to Many
+#+begin_src csharp
+CreateMap<Item, ItemDto>()
+    .ForMember(dest => dest.Softwares, opt => opt.MapFrom(src => src.ItemSoftwares.Select(isr => isr.Software))); //? map many to many for shows software data
+CreateMap<ItemDto, Item>();
+#+end_src
+il ~.ForMember()~ serve per mappare la relazione *many to many* della relazione *ItemSoftwares*, in questo modo riusciamo a visualizzare gli items con dentro le informazioni con i loro relativi software.
 * Repository Pattern
 * Depenency Injection
 * Map in js

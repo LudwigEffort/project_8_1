@@ -26,10 +26,11 @@ namespace LoginWebAPI.Controllers
         {
             var users = _mapper.Map<List<UserAdminDto>>(_userAdminRepository.GetUsers());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(users);
         }
@@ -46,10 +47,11 @@ namespace LoginWebAPI.Controllers
 
             var user = _mapper.Map<UserAdminDto>(_userAdminRepository.GetUser(userId));
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(user);
         }
@@ -145,10 +147,11 @@ namespace LoginWebAPI.Controllers
 
             var userToDelete = _userAdminRepository.GetUser(userId);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             if (!_userAdminRepository.DeliteUser(userToDelete))
             {
