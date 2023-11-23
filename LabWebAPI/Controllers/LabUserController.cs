@@ -40,10 +40,11 @@ namespace LabWebAPI.Controllers
             //? Lab user get all method
             var users = _mapper.Map<List<LabUserDto>>(_labUserRepository.GetLabUsers());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(users);
         }
@@ -74,10 +75,11 @@ namespace LabWebAPI.Controllers
 
             var labUser = _mapper.Map<LabUserDto>(_labUserRepository.GetLabUserById(labUserId));
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(labUser);
         }
@@ -219,10 +221,11 @@ namespace LabWebAPI.Controllers
 
             var labUserToDelete = _labUserRepository.GetLabUserById(labUserId);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             var test = _labUserRepository.DeleteLabUser(labUserToDelete);
 

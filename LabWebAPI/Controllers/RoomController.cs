@@ -40,10 +40,11 @@ namespace LabWebAPI.Controllers
             //? Room get method         
             var rooms = _mapper.Map<List<RoomDto>>(_roomRepository.GetRooms());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(rooms);
         }
@@ -74,10 +75,11 @@ namespace LabWebAPI.Controllers
 
             var room = _mapper.Map<RoomDto>(_roomRepository.GetRoomById(roomId));
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(room);
         }
@@ -218,10 +220,11 @@ namespace LabWebAPI.Controllers
 
             var roomToDelete = _roomRepository.GetRoomById(roomId);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             if (!_roomRepository.DeleteRoom(roomToDelete))
             {

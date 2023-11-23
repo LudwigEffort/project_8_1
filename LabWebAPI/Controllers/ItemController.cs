@@ -221,10 +221,11 @@ namespace LabWebAPI.Controllers
 
             var itemToDelete = _itemRepository.GetItemById(itemId);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             if (!_itemRepository.DeleteItem(itemToDelete))
             {

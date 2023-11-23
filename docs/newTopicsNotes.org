@@ -51,8 +51,14 @@ il ~.ForMember()~ serve per mappare la relazione *many to many* della relazione 
 *** Save
 In sintesi, questo metodo *Save* tenta di salvare le modifiche nel database tramite il contesto ~_context~. Poi restituisce *true* se almeno una entità è stata salvata con successo, altrimenti restituisce *false*. Questo metodo può essere utile per verificare se l'operazione di salvataggio ha avuto effetto sul database.
 ** Controller
+*** itemCreate
+*** ProduceResponseType
+I *ResponseType* all'interno delle parentesi quadre nei tuoi metodi del controller in ASP.NET Core servono a specificare il tipo di risposta che il metodo restituirà in caso di successo. Questo aiuta a migliorare la documentazione e la comprensione del codice, oltre a fornire informazioni utili per gli strumenti di generazione automatica della documentazione dell'API, come Swagger.
+Per esempio il ~[ProduceResponseType(200, Type = typeof(IEnumerable<Item>))]~ indica che il metodo ~GetItems~ restituirà una risposta HTTP 200 con un corpo contenente un ~IEnumerable<Item>~ in caso di successo.
 ** Proprietá pubbliche
 Utilizzare metodi pubblici in un repository è una pratica comune. Il repository espne un'interfaccia pubblica per le operazioni sui dati.
 Quando faccialmo la *DI* del repository nel controller, ho adottato le seguenti pratiche:
 1. *Incapsulamento*: dichiarando la variabile del repository com ~private~, nascondo i dettagli dell'impementazione del repository dal resto dell'applicazone. In questo modo il controller non espone il repository agli altri componeti dell'applicazone.
 2. *Immutabilitá*: usando la parola chiave ~readonly~, indichiamo che la variabile del repository puó essere assegnata solo durante la creazione dell'istanza del controller (cioè nel costruttore del controller) e non puó essere modificata in seguito. Questo garantisce la costanza della dipendeza iniettata.
+3. *Separazione delle preoccupazioni*
+4. *Testing*

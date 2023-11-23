@@ -40,10 +40,11 @@ namespace LabWebAPI.Controllers
             //? Software get method
             var softwares = _mapper.Map<List<SoftwareDto>>(_softwareRepository.GetSoftwares());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(softwares);
         }
@@ -74,10 +75,11 @@ namespace LabWebAPI.Controllers
 
             var software = _mapper.Map<SoftwareDto>(_softwareRepository.GetSoftwareById(softwareId));
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(software);
         }
@@ -215,10 +217,11 @@ namespace LabWebAPI.Controllers
 
             var softwareToDelete = _softwareRepository.GetSoftwareById(softwareId);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             if (!_softwareRepository.DeleteSoftware(softwareToDelete))
             {

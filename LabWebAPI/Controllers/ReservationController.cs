@@ -48,10 +48,11 @@ namespace LabWebAPI.Controllers
             //? Reservation get all method
             var reservations = _mapper.Map<List<ReservationDto>>(_reservationRepository.GetReservations());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(reservations);
         }
@@ -81,10 +82,11 @@ namespace LabWebAPI.Controllers
 
             var reservation = _mapper.Map<ReservationDto>(_reservationRepository.GetReservationById(reservationId));
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             return Ok(reservation);
         }
@@ -171,10 +173,11 @@ namespace LabWebAPI.Controllers
 
             var reservationToDelete = _reservationRepository.GetReservationById(reservationId);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //TODO: to remove
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             if (!_reservationRepository.DeleteReservation(reservationToDelete))
             {
