@@ -34,6 +34,7 @@ namespace LoginWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            //? checks if user already exists
             var user = _userClientRepository.GetUsers()
                 .Where(u => u.EmailAddress.Trim().ToUpper() == createUser.EmailAddress.TrimEnd().ToUpper())
                 .FirstOrDefault();
@@ -51,6 +52,8 @@ namespace LoginWebAPI.Controllers
 
             //? generate a nuance from auth helper
             var nuanceSignup = _authHelper.GenerateNuance(createUser.Password.Length);
+
+            //BUG: nuance didn't use
 
             //? checks password
             if (!_authHelper.ValidatePasswordWithNuance(createUser.Password, createUser.Password, nuanceSignup))
@@ -92,6 +95,8 @@ namespace LoginWebAPI.Controllers
                 return Unauthorized("User not found, or is banned");
             }
 
+            //BUG: nuance didn't use
+
             var nuance = _authHelper.GenerateNuance(loginRequest.PasswordWithNuance.Length);
 
             if (!_authHelper.ValidatePasswordWithNuance(loginRequest.PasswordWithNuance, user.Password, nuance))
@@ -99,6 +104,7 @@ namespace LoginWebAPI.Controllers
                 return Unauthorized("Email or password is incorrect.");
             }
 
+            //? Generate token
             string token = _authHelper.GenerateToken(loginRequest.Email);
 
             return Ok(new { message = "Login successful", Token = token });

@@ -16,7 +16,6 @@ namespace LabWebAPI.Middlewares
         {
             try
             {
-                //? token type: ludwig@gmail.com-PJTDO5QE5O (Bearer [token])
                 //? exstract token from request header
                 var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ').Last();
                 Console.WriteLine($"Header of Authorization: {token}");
@@ -49,7 +48,7 @@ namespace LabWebAPI.Middlewares
 
                 if (!string.IsNullOrEmpty(email))
                 {
-                    var labUser = labUserRepository.GetLabUserByEmail(email); //? check user in Lab Manager db
+                    var labUser = labUserRepository.GetLabUserByEmail(email); //? checks if the user exists in the db
 
                     if (labUser != null)
                     {

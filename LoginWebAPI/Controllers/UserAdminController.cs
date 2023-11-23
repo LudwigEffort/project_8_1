@@ -67,6 +67,7 @@ namespace LoginWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            //? checks if user already exists
             var user = _userAdminRepository.GetUsers()
                 .Where(u => u.EmailAddress.Trim().ToUpper() == createUser.EmailAddress.TrimEnd().ToUpper())
                 .FirstOrDefault();

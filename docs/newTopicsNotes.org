@@ -35,51 +35,6 @@ La combinazione di password e nuance è una strategia per la sicurezza delle pas
 **** SignUp
 **** SignIn
 * Middleware
-Il middleware ~AuthValidationMiddleware~ e il controller ~ItemController~ lavorano insieme all'interno dell'architettura ASP.NET Core per gestire l'autenticazione e il flusso delle richieste HTTP. In dettaglio abbiamo:
-** Funzinamento del Middleware
-1. *Intercettazione delle Richieste*, il middleware si posiziona nella pipeline delle richieste HTTP. Quando una richiesta arriva all'applicazione, passa attraverso il middleware prima di raggiungere il controller.
-2. *Estrazione del Token di Autenticazione*, il middleware estrae il token di autenticazione dall'header della richiesta. Questo token coniene informazioni relative all'utente, in questo caso l'email.
-3. *Verifica e Autenticazione dell'Utente*: tramite il token, il middleware determina l'identita dell'utente. Si collega al repository ~ILabUserRepository~ per recuperare i dettagli dell'utente.
-4. *Gestione delle Eccezioni*, il middleware gestice le eccezioni relative all'autenticazione, come la mancanza di un token valido o un utente non trovato. In questi casi, importa i codici di stato della risposta HTTP.
-5. *Passagio alla prossima fase della pipeline*, se l'autenticazione riesce, il middleware aggiunge l'utente a ~HttpContext.Items~ e passa il controllo al controller.
-** Integrazione con il Controller
-1. *Verifica dell'Autenticazione*, per ogni metodo del controller, c'è un controllo che verifica se un oggetto *User* è presente in ~HttpContext.Items~. Questo oggeto *User* viene impostato dal middleware se l'autenticazione è riuscita.
-2. *Autorizzazione basata sui ruoli*, oltre a verificare l'autenticazione, il controller verifica il ruolo dell'utente per determinare se l'utente ha il permesso di eseguire una determinata richiesta.
-3. *Flusso della richiesta*, se l'utente non è autenticato o no ha il ruolo adeguato, il controller restituisce un errore.
-4. *Elaborazione delle richieste*, se l'utente è autenticato e autorizzato, il controller procede con le operazini HTTP.
-** Vantaggi del Middleware
-L'uso di questa archittetura ha i seguenti vantaggi:
-+ *Separazione delle preoccupazioni*: il middleware si occupa esclusivamente dell'autenticazine, mentre il controller si concentra sulla logica business. Questo rende il codice più pulito, modulare e mantenibile.
-+ *Riusabilità*, possiamo riutilizzarla l'autenticazione tramite middleware su più controller.
-+ *Sicurezza Migliorata*, centralizzando la logica di autenticazione si riduce il rischio di errori di sicurezza, in quanto ogni richiesta deve passare attraverso lo stesso processo di autenticazione.
-** Analisi dettagliata del codice
-*** Costruttore ~AuthValidationMiddleware(RequestDelegate next)~
-+ *Ruolo*, inizializza l'instanza del middleware.
-+ *Parametro* ~next~, si tratta di un delegato *RequestDelegate* che rappresenta il prossimo middleware nella pipeline dele richieste.
-+ *Funzione*, memorizza il delegato ~next~ in una variabile privata ~_next~ per poter passare la richiesta al successivo middleware nella pipeline, una volta completata l'elaborazine in questo middleware.
-*** Metodo ~Invoke(HttpContext context, ILabUserRepository labUserRepository)~
-+ *Ruolo*, è il metodo principale eseguito per ogni richiesta HTTP che passa attraverso il middleware.
-+ *Parametri*:
-  + ~HttpContext context~, rappresenta il contesto della richiesta HTTP corrente.
-  + ~ILabUserRepository labUserRepository~, fornisce l'accesso ai dati nel db tramite il repository pattern.
-+ *Flusso*:
-  1. Estrae il token di autenticazione dall'header della richiesta.
-  2. Se il token non è vuoto, chiama ~AttachUserToContext~ per processare il token.
-  3. Passa la richiesta al prossimo middleware nella pipeline chiamando ~await _next(context)~.
-  4. Gestisce le eccezioni, impostando i codici di stato appropriati sulla risposta HTTP in caso di errori di autenticazione.
-*** Metodo ~AttachUserToContext(HttpContext context, ILabUserRepository labUserRepository, string token)~
-+ *Ruolo*, associa un utente autenticato al contesto della richiesta HTTP.
-+ *Flusso*:
-  1. Estrae l'email dall'iterno del token chamando ~ExtractEmailFromToken~
-  2. Utilizza il ~labUserRepository~ per trovare l'utente basandosi sull'email estratta.
-  3. Se l'utente esiste, lo aggiunge a ~HttpContext.Items~, permettendo cosi ai successivi middleware e controller di accedere all'utente autenticato.
-  4. Se l'utente non esiste, solleva un exception.
-*** Metodo ~ExtractEmailFromToken(string token)~
-+ *Ruolo*, estra l'email dall'iterno del token di autenticazione.
-+ *Funzinamento*, scompone il token in parti (usando il carattere '-' come separatore) e restituisce la prima parte, l'email.
-+ *Utilizzo*, serve per ottenere l'identita dell'user tramite il token
-** Conclusione
-In conclusione, il middleware svolge un ruolo cruciale nell'autenticare le richieste prima che queste raggiungano il controller. Questa struttura assicura che solo gli utenti autenticati e autorizzati possono accedere alle funzionalitá del controller.
 * DTO & Automapper
 ** Mapping Many to Many
 #+begin_src csharp
@@ -91,4 +46,4 @@ il ~.ForMember()~ serve per mappare la relazione *many to many* della relazione 
 * Repository Pattern
 * Depenency Injection
 * Map in js
-* ModelState
+* Controller & LinQ
