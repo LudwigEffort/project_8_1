@@ -12,7 +12,7 @@ namespace LoginWebAPI.Interfaces
         bool CreateUser(User user);
 
         //* Utils methods
-        bool UserExists(User user);
+        bool UserExists(User user); //BUG: it had to be -> UserExists(int id)
         bool Save();
     }
 }
