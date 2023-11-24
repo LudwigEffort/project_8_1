@@ -41,7 +41,7 @@ namespace LabWebAPI.Repositories
                 var software = _context.Softwares.FirstOrDefault(s => s.Id == softtwareDto.Id);
                 if (software != null)
                 {
-                    _context.ItemSoftwares.Add(new ItemSoftware { ItemId = item.Id, SoftwareId = software.Id });
+                    _context.ItemSoftwares.Add(new ItemSoftware { ItemId = item.Id, SoftwareId = software.Id }); //? add relationship in join table
                 }
             }
 
